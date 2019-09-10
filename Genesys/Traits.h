@@ -29,11 +29,16 @@
 #include "ProcessAnalyser_if.h"
 #include "ExperimentDesign_if.h"
 #include "SimulationReporter_if.h"
+#include "PluginConnector_if.h"
 
 // genesys applications
-#include "MyApp.h"
+#include "FullSimulationOfComplexModel.h"
+#include "BuildSimulationModel03.h"
+#include "FirstExampleOfSimulation.h"
+#include "SecondExampleOfSimulation.h"
 #include "GenesysGUI.h"
 #include "GenesysConsole.h"
+#include "TestEnterLeaveRoute.h"
 
 //  Default implementations
 //statistics
@@ -43,12 +48,13 @@
 #include "IntegratorDefaultImpl1.h"
 #include "HypothesisTesterDefaultImpl1.h"
 #include "SamplerDefaultImpl1.h"
-//model
+//simulator and parts
+#include "parserBisonFlex/ParserDefaultImpl2.h"
+#include "PluginConnectorDummyImpl1.h"
+//model and parts
 #include "SimulationReporterDefaultImpl1.h"
 #include "ModelCheckerDefaultImpl1.h"
 #include "ModelPersistenceDefaultImpl1.h"
-//parser
-#include "parserBisonFlex/ParserDefaultImpl2.h"
 //tools
 #include "ExperimentDesignDefaultImpl1.h"
 #include "ProcessAnalyserDefaultImpl1.h"
@@ -65,16 +71,35 @@ struct Traits {
 template <> struct Traits<GenesysApplication_if> {
     //typedef GenesysGUI Application;
     //typedef GenesysConsole Application;
-    typedef MyApp Application;
+    //typedef FullSimulationOfComplexModel Application;
+    //typedef FirstExampleOfSimulation Application;
+    //typedef SecondExampleOfSimulation Application;
+    typedef TestEnterLeaveRoute Application;
 };
 
+
+
 /*
- *  Model
+ *  Simulator and Simulator Parts
+ */
+
+
+template <> struct Traits<PluginConnector_if> {
+    typedef PluginConnectorDummyImpl1 Implementation; 
+};
+
+template <> struct Traits<Parser_if> {
+    typedef ParserDefaultImpl2 Implementation; 
+};
+
+
+/*
+ *  Model and Model Parts
  */
 
 template <> struct Traits<Model> {
     static const bool debugged = true;
-    static const Util::TraceLevel traceLevel = Util::TraceLevel::blockArrival;// :simulation;
+    static const Util::TraceLevel traceLevel = Util::TraceLevel::simulation;
 };
 
 template <> struct Traits<ModelPersistence_if> {
@@ -92,10 +117,6 @@ template <> struct Traits<ModelComponent> {
 
 template <> struct Traits<ModelChecker_if> {
     typedef ModelCheckerDefaultImpl1 Implementation;
-};
-
-template <> struct Traits<Parser_if> {
-    typedef ParserDefaultImpl2 Implementation; //ParserDefaultImpl1
 };
 
 /*

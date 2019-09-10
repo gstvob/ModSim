@@ -16,7 +16,6 @@
 
 #include <string>
 #include <iostream>
-//#include "Traits.h"
 #include "Model.h"
 #include "Plugin.h"
 #include "List.h"
@@ -49,10 +48,9 @@ private: // attributes 1:1 objects
     ModelManager* _modelManager;
     ToolManager* _toolManager;
     TraceManager* _traceManager;
-    //TraceManager* _tracer;
 private: // attributes 1:1 native
     const std::string _name = "ReGenESyS - Reborn Generic and Expansible System Simulator";
-    const std::string _version = "2019.0601";
+    const std::string _version = "190909";
 };
 
 #endif /* GENESYS_H */
