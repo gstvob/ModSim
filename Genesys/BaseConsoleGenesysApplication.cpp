@@ -94,6 +94,8 @@ void BaseConsoleGenesysApplication::insertFakePluginsByHand(Simulator* simulator
     simulator->getPluginManager()->insert("route.so");
     simulator->getPluginManager()->insert("enter.so");
     simulator->getPluginManager()->insert("leave.so");
+    simulator->getPluginManager()->insert("hold.so");
+    simulator->getPluginManager()->insert("signal.so");
     // model elements
     simulator->getPluginManager()->insert("attribute.so");
     simulator->getPluginManager()->insert("counter.so");

@@ -86,6 +86,20 @@ void Hold::_execute(Entity* entity) {
             return;
         }
     }
+    else if (_type == Type::WaitForSignal) {
+        Waiting* waiting = new Waiting(entity, this, _model->getSimulation()->getSimulatedTime());
+        this->_queue->insertElement(waiting);
+    }
+}
+
+void Hold::release_signal(int _limit) {
+	for(int i = 0; i < _queue->size(); i++) {
+		Waiting* waiting = _queue->getAtRank(i);
+		_model->sendEntityToComponent(waiting->getEntity(), this->getNextComponents()->front(), 0.0);
+		if (i >= _limit) {
+			break;
+		}
+	}
 }
 
 void Hold::_initBetweenReplications() {

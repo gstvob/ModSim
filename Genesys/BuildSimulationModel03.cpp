@@ -27,6 +27,8 @@
 #include "Record.h"
 #include "Decide.h"
 #include "Dummy.h"
+#include "Hold.h"
+#include "Signal.h"
 
 // Model elements
 #include "ElementManager.h"
@@ -108,6 +110,11 @@ void _buildModel01_CreDelDis(Model* model) {
 
     EntityType* entityType1 = new EntityType(elements, "EntityType_1");
     elements->insert(Util::TypeOf<EntityType>(), entityType1);
+    EntityType* entityType2 = new EntityType(elements, "EntityType_2");
+    elements->insert(Util::TypeOf<EntityType>(), entityType2);
+
+    Queue* queue1 = new Queue(elements, "Queue_1");
+    elements->insert(Util::TypeOf<Queue>(), queue1);
 
     Create* create1 = new Create(model);
     create1->setEntityType(entityType1);
@@ -116,6 +123,13 @@ void _buildModel01_CreDelDis(Model* model) {
     create1->setEntitiesPerCreation(1);
     components->insert(create1);
 
+    Hold* hold1 = new Hold(model);
+    hold1->setName("Hold_1");
+    hold1->setQueueName("Queue_1");
+    hold1->setType(Hold::Type::WaitForSignal);
+    hold1->setWaitForValueExpr("sig");
+    components->insert(hold1);
+    
     Delay* delay1 = new Delay(model);
     delay1->setDelayExpression("2");
     delay1->setDelayTimeUnit(Util::TimeUnit::second);
@@ -124,9 +138,29 @@ void _buildModel01_CreDelDis(Model* model) {
     Dispose* dispose1 = new Dispose(model);
     components->insert(dispose1);
 
+    
+    Create* create2 = new Create(model);
+    create1->setEntityType(entityType2);
+    create1->setTimeBetweenCreationsExpression("1");
+    create1->setTimeUnit(Util::TimeUnit::second);
+    create1->setEntitiesPerCreation(1);
+    components->insert(create2);
+
+    Signal* signal1 = new Signal(model);
+    signal1->setSignalName("sig");
+    components->insert(signal1);
+
+    Dispose* dispose2 = new Dispose(model);
+    components->insert(dispose2);
+
     // connect model components to create a "workflow" -- should always start from a SourceModelComponent and end at a SinkModelComponent (it will be checked)
     create1->getNextComponents()->insert(delay1);
-    delay1->getNextComponents()->insert(dispose1);
+    delay1->getNextComponents()->insert(hold1);
+    hold1->getNextComponents()->insert(dispose1);
+
+    create2->getNextComponents()->insert(signal1);
+    signal1->getNextComponents()->insert(dispose2);
+
 }
 
 void _buildModel02_CreDelDis(Model* model) {
@@ -376,7 +410,7 @@ void BuildSimulationModel03::builAndRunSimulationdModel() {
     //simulator->getModelManager()->loadModel("./models/model01_CreDelDis.txt");
 
     //model->checkModel();
-    //model->show();
+    model->show();
     model->getSimulation()->startSimulation();
 }
 

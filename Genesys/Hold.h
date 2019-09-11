@@ -42,6 +42,8 @@ public:
     std::string getWaitForValueExpr() const;
     std::string getQueueName() const;
 
+    void release_signal(int _limit);
+
 protected:
     virtual void _execute(Entity* entity);
     virtual bool _loadInstance(std::map<std::string, std::string>* fields);
