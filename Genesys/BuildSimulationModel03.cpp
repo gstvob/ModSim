@@ -27,6 +27,8 @@
 #include "Record.h"
 #include "Decide.h"
 #include "Dummy.h"
+#include "Hold.h"
+#include "Signal.h"
 
 // Model elements
 #include "ElementManager.h"
@@ -335,6 +337,70 @@ void _buildMostCompleteModel(Model* model) {
     dummy1->getNextComponents()->insert(dispose1);
 }
 
+void _buildModel01_CreHolDisCreSigDis(Model* model) {
+        // buildModelWithAllImplementedComponents
+    ModelInfo* infos = model->getInfos();
+    infos->setReplicationLength(60);
+    infos->setReplicationLengthTimeUnit(Util::TimeUnit::second);
+    infos->setNumberOfReplications(1);
+    infos->setDescription("./models/model01_CreDelDis.txt");
+
+    ComponentManager* components = model->getComponentManager();
+    ElementManager* elements = model->getElementManager();
+
+    EntityType* entityType1 = new EntityType(elements, "EntityType_1");
+    elements->insert(Util::TypeOf<EntityType>(), entityType1);
+
+    EntityType* entityType2 = new EntityType(elements, "EntityType_2");
+    elements->insert(Util::TypeOf<EntityType>(), entityType2);
+    
+    Queue* queue_hold = new Queue(elements, "Queue_hold_1");
+    queue_hold->setOrderRule(Queue::OrderRule::FIFO);
+    elements->insert(Util::TypeOf<Queue>(), queue_hold);
+
+    Queue* queue_signal = new Queue(elements, "signal1");
+    queue_signal->setOrderRule(Queue::OrderRule::FIFO);
+    elements->insert(Util::TypeOf<Queue>(), queue_signal);
+
+    Create* create1 = new Create(model);
+    create1->setEntityType(entityType1);
+    create1->setTimeBetweenCreationsExpression("1");
+    create1->setTimeUnit(Util::TimeUnit::second);
+    create1->setEntitiesPerCreation(1);
+    components->insert(create1);
+
+    Create* create2 = new Create(model);
+    create2->setEntityType(entityType2);
+    create2->setTimeBetweenCreationsExpression("1");
+    create2->setTimeUnit(Util::TimeUnit::second);
+    create2->setEntitiesPerCreation(1);
+    components->insert(create2);
+
+    Hold* hold1 = new Hold(model);
+    hold1->setWaitForValueExpr("signal1");
+    hold1->setType(Hold::Type::WaitForSignal);
+    hold1->setQueueName("Queue_hold_1");
+    components->insert(hold1);
+
+    Signal* signal1 = new Signal(model);
+    signal1->setSignalName("signal1");
+    signal1->setQueueName("signal1");
+    components->insert(signal1);
+
+    Dispose* dispose1 = new Dispose(model);
+    components->insert(dispose1);
+
+    Dispose* dispose2 = new Dispose(model);
+    components->insert(dispose2);
+
+    // connect model components to create a "workflow" -- should always start from a SourceModelComponent and end at a SinkModelComponent (it will be checked)
+    create1->getNextComponents()->insert(hold1);
+    hold1->getNextComponents()->insert(dispose1);
+
+    create2->getNextComponents()->insert(signal1);
+    signal1->getNextComponents()->insert(dispose2);
+}
+
 /**
  * This function shows an example of how to create a simulation model.
  * It creates some handlers for tracing (debug) and for events, set model infos and than creates the model itself.
@@ -362,20 +428,20 @@ void BuildSimulationModel03::builAndRunSimulationdModel() {
     //ev->addOnReplicationEndHandler(&onReplicationEndHandlerFunction);
     //ev->addOnProcessEventHandler(&onProcessEventHandlerFunction);
     
-    _buildModel01_CreDelDis(model);
+    _buildModel01_CreHolDisCreSigDis(model);
     //_buildModel02_CreDelDis(model);
     //_buildModel03_CreSeiDelResDis(model);
     //_testaMeuModelo(model);
     //_buildMostCompleteModel(model);
 
-    //simulator->getModelManager()->insert(model);
+    simulator->getModelManager()->insert(model);
     //model->saveModel(model->getInfos()->getDescription());
 
     //simulator->getModelManager()->loadModel("./models/model99_AllTogether.txt");
     //simulator->getModelManager()->loadModel("./models/model01_CreDelDis.txt");
 
-    //model->checkModel();
-    //model->show();
+    // model->checkModel();
+    model->show();
     model->getSimulation()->startSimulation();
 }
 

@@ -125,6 +125,8 @@ void BaseConsoleGenesysApplication::insertFakePluginsByHand(Simulator* simulator
     simulator->getPluginManager()->insert("route.so");
     simulator->getPluginManager()->insert("sequence.so");
     simulator->getPluginManager()->insert("station.so");
+    simulator->getPluginManager()->insert("hold.so");
+    simulator->getPluginManager()->insert("signal.so");
     // arena transfer conveyour
     simulator->getPluginManager()->insert("access.so");
     simulator->getPluginManager()->insert("exit.so");

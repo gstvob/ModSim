@@ -72,7 +72,7 @@ struct Traits {
 template <> struct Traits<GenesysApplication_if> {
     //typedef GenesysGUI Application;
     //typedef GenesysConsole Application;
-    typedef FullSimulationOfComplexModel Application;
+    typedef BuildSimulationModel03 Application;
     //typedef FirstExampleOfSimulation Application;
     //typedef SecondExampleOfSimulation Application;
     //typedef TestSimulationControlAndSimulationResponse Application;
