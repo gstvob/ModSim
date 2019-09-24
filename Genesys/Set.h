@@ -14,13 +14,31 @@
 #ifndef SET_H
 #define SET_H
 
-class Set {
+#include "ModelElement.h"
+#include "ElementManager.h"
+#include "ParserChangesInformation.h"
+#include "PluginInformation.h"
+
+class Set: public ModelElement {
 public:
-    Set();
+    Set(ElementManager* elems);
+    Set(ElementManager* elems, std::string name);
     Set(const Set& orig);
     virtual ~Set();
-private:
+public: // static
+    static ModelElement* LoadInstance(ElementManager* elems, std::map<std::string, std::string>* fields); 
+    static PluginInformation* GetPluginInformation();
+public:
+    virtual std::string show();
 
+protected: // must be overriden by derived classes
+    virtual bool _loadInstance(std::map<std::string, std::string>* fields);
+    virtual std::map<std::string, std::string>* _saveInstance();
+protected: // could be overriden by derived classes
+    virtual bool _check(std::string* errorMessage);
+    virtual ParserChangesInformation* _getParserChangesInformation();
+private:
+    ElementManager* _elems;
 };
 
 #endif /* SET_H */

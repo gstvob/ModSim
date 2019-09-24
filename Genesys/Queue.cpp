@@ -27,8 +27,8 @@ Queue::Queue(ElementManager* elems, std::string name) : ModelElement(Util::TypeO
 }
 
 void Queue::_initCStats() {
-    _cstatNumberInQueue = new StatisticsCollector("Number In Queue", this); /* TODO: ++ WHY THIS INSERT "DISPOSE" AND "10ENTITYTYPE" STATCOLL ?? */
-    _cstatTimeInQueue = new StatisticsCollector("Time In Queue", this);
+    _cstatNumberInQueue = new StatisticsCollector(_elems, "Number In Queue", this); /* TODO: ++ WHY THIS INSERT "DISPOSE" AND "10ENTITYTYPE" STATCOLL ?? */
+    _cstatTimeInQueue = new StatisticsCollector(_elems, "Time In Queue", this);
     _elems->insert(Util::TypeOf<StatisticsCollector>(), _cstatNumberInQueue);
     _elems->insert(Util::TypeOf<StatisticsCollector>(), _cstatTimeInQueue);
 
@@ -133,4 +133,11 @@ std::map<std::string, std::string>* Queue::_saveInstance() {
 
 bool Queue::_check(std::string* errorMessage) {
     return _elems->check(Util::TypeOf<Attribute>(), _attributeName, "AttributeName", false, errorMessage);
+}
+
+ParserChangesInformation* Queue::_getParserChangesInformation() {
+    ParserChangesInformation* changes = new ParserChangesInformation();
+    //changes->getProductionToAdd()->insert(...);
+    //changes->getTokensToAdd()->insert(...);
+    return changes;
 }

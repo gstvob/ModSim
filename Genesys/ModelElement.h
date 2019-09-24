@@ -19,6 +19,8 @@
 #include <vector>
 #include "Util.h"
 
+#include "ParserChangesInformation.h"
+
 /*!
  * This class is the basis for any element of the model (such as Queue, Resource, Variable, etc.) and also for any component of the model. 
  * It has the infrastructure to read and write on file and to verify symbols.
@@ -40,18 +42,17 @@ public: // static
     static bool Check(ModelElement* element, std::string* errorMessage);
 public:
     virtual std::string show();
-    bool generateReportInformation() const;
-
+    
 protected: // must be overriden by derived classes
     virtual bool _loadInstance(std::map<std::string, std::string>* fields);
     virtual std::map<std::string, std::string>* _saveInstance();
+protected: // could be overriden by derived classes
     virtual bool _check(std::string* errorMessage);
-
+    virtual ParserChangesInformation* _getParserChangesInformation();
 protected:
     Util::identitifcation _id;
     std::string _name;
     std::string _typename;
-    bool _generateReportInformation = false; //@TODO: This attribute should be used by SimulationReport_if implementations to look for elements to include in reports
 };
 
 #endif /* MODELELEMENT_H */
