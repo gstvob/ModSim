@@ -90,11 +90,11 @@ int TestModels::main(int argc, char** argv) {
     elements->insert(Util::TypeOf<Queue>(), filasignal);
 
     Hold* hold1 = new Hold(model);
-    hold1->setType(Hold::Type::WaitForSignal);
+    hold1->setType(Hold::HoldType::WaitForSignal);
     hold1->setWaitForValueExpr("1");
     hold1->setQueue(filaHold1);    
     components->insert(hold1);
-
+/*
     Station* station1 = new Station(elements);
     station1->setEnterIntoStationComponent(hold1);
     elements->insert(Util::TypeOf<Station>(), station1);
@@ -107,14 +107,14 @@ int TestModels::main(int argc, char** argv) {
     route1->setRouteDestinationType(Route::DestinationType::Station);
     route1->setStation(station1);
     components->insert(route1);
-
+*/
 
     Create* create2 = new Create(model);
-    create1->setEntityType(entityType1);
-    create1->setTimeBetweenCreationsExpression("30");
-    create1->setTimeUnit(Util::TimeUnit::minute);
-    create1->setEntitiesPerCreation(1);
-    components->insert(create1);
+    create2->setEntityType(entityType1);
+    create2->setTimeBetweenCreationsExpression("30");
+    create2->setTimeUnit(Util::TimeUnit::minute);
+    create2->setEntitiesPerCreation(1);
+    components->insert(create2);
 
     Signal* signal1 = new Signal(model);
     signal1->setSignalName("1");
@@ -126,13 +126,11 @@ int TestModels::main(int argc, char** argv) {
     components->insert(dispose1);
 
     Dispose* dispose2 = new Dispose(model);
-    components->insert(dispose1);
+    components->insert(dispose2);
 
     // connect model components to create a "workflow" -- should always start from a SourceModelComponent and end at a SinkModelComponent (it will be checked)
     create1->getNextComponents()->insert(delay1);
-    delay1->getNextComponents()->insert(route1);
-    
-    enter1->getNextComponents()->insert(enter1);
+    delay1->getNextComponents()->insert(hold1);
     hold1->getNextComponents()->insert(dispose1);
 
     create2->getNextComponents()->insert(signal1);

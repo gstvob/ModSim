@@ -1,0 +1,34 @@
+# Genesys simulation model 
+# Last saved on Tue Oct 22 00:05:47 2019
+# simulator infos
+name=ReGenESyS - Reborn Generic and Expansible System Simulator; typename=SimulatorInfo; version=190909; 
+
+# model infos
+analystName=Your name; description=This simulation model tests the components and elements that have been implemented so far.; name=Model 1; numberOfReplications=10; projectTitle=The title of the project; replicationLength=1000.000000; replicationLengthTimeUnit=6; terminatingCondition=; typename=ModelInfo; version=1.0; warmUpTime=0.000000; warmUpTimeTimeUnit=5; 
+
+# model elements
+attributeName=; id=5; name=fila1; orderRule=1; typename=Queue; 
+
+attributeName=; id=8; name=fila2; orderRule=1; typename=Queue; 
+
+id=1; initialNVACost=0.000000; initialOtherCost=0.000000; initialPicture=report; initialVACost=0.000000; initialWaitingCost=0.000000; name=Representative_EntityType; typename=EntityType; 
+
+id=21; name=Entity.ArrivalTime; typename=Attribute; 
+
+id=22; name=Entity.WaitTime; typename=Attribute; 
+
+# model components
+delayExpression=20; delayExpressionTimeUnit=6; id=4; name=Delay_1; nextId0=11; nextSize=1; typename=Delay; 
+
+entitiesPerCreation=1; entityTypename=Representative_EntityType; firstCreation=0.000000; id=12; maxCreations=4294967295; name=Create_2; nextId0=14; nextSize=1; timeBetweenCreations=30; timeBetweenCreationsTimeUnit=6; typename=Create; 
+
+entitiesPerCreation=1; entityTypename=Representative_EntityType; firstCreation=0.000000; id=2; maxCreations=4294967295; name=Create_1; nextId0=4; nextSize=1; timeBetweenCreations=40; timeBetweenCreationsTimeUnit=6; typename=Create; 
+
+id=11; name=Hold_1; nextId0=15; nextSize=1; queueName=fila1; typename=Hold; waitForValue=1; 
+
+id=14; name=1; nextId0=17; nextSize=1; typename=Signal; 
+
+id=15; name=Dispose_1; nextSize=0; typename=Dispose; 
+
+id=17; name=Dispose_2; nextSize=0; typename=Dispose; 
+

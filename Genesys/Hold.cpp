@@ -50,7 +50,7 @@ void Hold::setWaitForValueExpr(std::string _expr) {
     this->_wait_for_value = _expr;
 }
 
-void Hold::setType(Type _type) {
+void Hold::setType(HoldType _type) {
     this->_type = _type;
 }
 
@@ -58,7 +58,7 @@ void Hold::setQueue(Queue* _name) throw() {
     this->_queue = _name;
 }
 
-Hold::Type Hold::getType() const {
+Hold::HoldType Hold::getType() const {
     return this->_type;
 }
 
@@ -71,7 +71,7 @@ std::string Hold::getQueueName() const {
 }
 
 void Hold::_execute(Entity* entity) {
-    if (_type == Type::ScanForCondition) {
+    if (_type == HoldType::ScanForCondition) {
         Waiting* waiting = new Waiting(entity, this, _model->getSimulation()->getSimulatedTime());
         this->_queue->insertElement(waiting);
         double condition = _model->parseExpression((_wait_for_value));
@@ -81,7 +81,7 @@ void Hold::_execute(Entity* entity) {
             return;
         }
     }
-    else if (_type == Type::WaitForSignal) {
+    else if (_type == HoldType::WaitForSignal) {
         Queue* signal_queue = dynamic_cast<Queue*>(_model->getElementManager()->getElement(Util::TypeOf<Queue>(), _wait_for_value));
         Waiting* waiting = new Waiting(entity, this, _model->getSimulation()->getSimulatedTime());
         this->_queue->insertElement(waiting);

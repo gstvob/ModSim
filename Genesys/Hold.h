@@ -21,7 +21,7 @@
 class Hold : public ModelComponent {
 
 public:
-    enum class Type: int {
+    enum class HoldType: int {
         WaitForSignal=0,
         ScanForCondition=1,
         InfiniteHold=2
@@ -35,10 +35,10 @@ public:
     static ModelComponent* LoadInstance(Model* model, std::map<std::string, std::string>* fields);
 
     void setWaitForValueExpr(std::string _expr);
-    void setType(Type _type);
+    void setType(HoldType _type);
     void setQueue(Queue* _name) throw();
 
-    Type getType() const;
+    HoldType getType() const;
     std::string getWaitForValueExpr() const;
     std::string getQueueName() const;
 
@@ -53,7 +53,7 @@ protected:
 
 private:
     std::string _wait_for_value = "1";
-    Type _type = Type::WaitForSignal;
+    HoldType _type = HoldType::WaitForSignal;
     Queue* _queue;
 };
 
