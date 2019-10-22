@@ -12,9 +12,10 @@
 # include "../List.h"
 # include "../Variable.h"
 # include "../Queue.h"
-# include "../Formula.h" 
+# include "../Formula.h"
 # include "../Resource.h"
-//# include "../Set.h"
+# include "../StatisticsCollector.h"
+# include "../Set.h"
 # include "../ModelElement.h"
 # include "../Attribute.h"
 
@@ -113,10 +114,10 @@ L      [A-Za-z0-9_.]+
 [cC][oO][sS]      {return yy::genesyspp_parser::make_fCOS(obj_t(0, std::string(yytext)), loc);}
 
 %{// aritmetic funcions %}
-[aA][iI][nN][tT]  {return yy::genesyspp_parser::make_fAINT(obj_t(0, std::string(yytext)), loc);}
-[fF][rR][aA][cC]  {return yy::genesyspp_parser::make_fFRAC(obj_t(0, std::string(yytext)), loc);}
-[mM][oO][dD]      {return yy::genesyspp_parser::make_fMOD(obj_t(0, std::string(yytext)), loc);}
-[iI][nN][tT]      {return yy::genesyspp_parser::make_fINT(obj_t(0, std::string(yytext)), loc);}
+[rR][oO][uU][nN][dD]  {return yy::genesyspp_parser::make_fROUND(obj_t(0, std::string(yytext)), loc);}
+[mM][oO][dD]          {return yy::genesyspp_parser::make_fMOD(obj_t(0, std::string(yytext)), loc);}
+[tT][rR][uU][nN][cC]  {return yy::genesyspp_parser::make_fTRUNC(obj_t(0, std::string(yytext)), loc);}
+[fF][rR][aA][cC]      {return yy::genesyspp_parser::make_fFRAC(obj_t(0, std::string(yytext)), loc);}
 
 %{// probability distributions %}
 [eE][xX][pP][oO]  {return yy::genesyspp_parser::make_fEXPO(obj_t(0, std::string(yytext)), loc);}
@@ -155,31 +156,32 @@ L      [A-Za-z0-9_.]+
 [lL][aA][sS][tT][iI][nN][qQ]         {return yy::genesyspp_parser::make_fLASTINQ(obj_t(0, std::string(yytext)), loc);}
 [fF][iI][rR][sS][tT][iI][nN][qQ]     {return yy::genesyspp_parser::make_fFIRSTINQ(obj_t(0, std::string(yytext)), loc);}
 [sS][aA][qQ][uU][eE]                 {return yy::genesyspp_parser::make_fSAQUE(obj_t(0, std::string(yytext)), loc);}
+[aA][qQ][uU][eE]                     {return yy::genesyspp_parser::make_fAQUE(obj_t(0, std::string(yytext)), loc);}
 
 %{//
   // to be defined by the SET plugin
   //%}
 [nN][uU][mM][sS][eE][tT]             {return yy::genesyspp_parser::make_fNUMSET(obj_t(0, std::string(yytext)), loc);}
 
+
+%{//
+  // to be defined by the CSTAT plugin
+  //%}
+[tT][aA][vV][gG]  {return yy::genesyspp_parser::make_fTAVG(obj_t(0, std::string(yytext)), loc);}
+
+
 [ \t\n]        ;
 
 
 {L}   {
-        // check if it is an ATTRIBUTE
-        int rank = driver.getModel()->getElementManager()->getRankOf(Util::TypeOf<Attribute>(), std::string(yytext));
-        if (rank>=0) {
-            double attributeValue = 0.0;
-            if (driver.getModel()->getSimulation()->getCurrentEntity() != nullptr) {
-                try {
-                    // it could crach because there may be no current entity, if the parse is running before simulation and therefore there is no CurrentEntity
-                    attributeValue = driver.getModel()->getSimulation()->getCurrentEntity()->getAttributeValue(std::string(yytext));
-                } catch(...) {
-                }
-            }
-            return yy::genesyspp_parser::make_ATRIB(obj_t(attributeValue, Util::TypeOf<Attribute>(), -1),loc);
-        }
-        
         ModelElement* element; 
+
+        // check if it is an ATTRIBUTE (and return the attribute ID (and not the value!)
+        element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<Attribute>(), std::string(yytext));
+        if (element != nullptr) { 
+            return yy::genesyspp_parser::make_ATRIB(obj_t(0, Util::TypeOf<Attribute>(), element->getId()),loc);
+        }
+
         // check VARIABLE
         element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<Variable>(), std::string(yytext));
         if (element != nullptr) { // it is a variable
@@ -187,7 +189,8 @@ L      [A-Za-z0-9_.]+
             double variableValue = var->getValue();
             return yy::genesyspp_parser::make_VARI(obj_t(variableValue, Util::TypeOf<Variable>(), var->getId()),loc);
         }
-        
+
+        // Should be definied by plugin FORMULA
         // check FORMULA
         element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<Formula>(), std::string(yytext));
         if (element != nullptr) { // it is a FORMULA
@@ -195,25 +198,36 @@ L      [A-Za-z0-9_.]+
             double formulaValue = form->getValue();
             return yy::genesyspp_parser::make_FORM(obj_t(formulaValue, Util::TypeOf<Formula>(), form->getId()),loc);
         }
-        
+
+        // Should be definied by plugin QUEUE
         // check QUEUE
         element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<Queue>(), std::string(yytext));
         if (element != nullptr) { 
-            return yy::genesyspp_parser::make_QUEUE(obj_t(0, Util::TypeOf<Variable>(), element->getId()),loc);
+            return yy::genesyspp_parser::make_QUEUE(obj_t(0, Util::TypeOf<Queue>(), element->getId()),loc);
         }
-        
+
+	// Should be definied by plugin RESOURCE
         // check RESOURCE
         element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<Resource>(), std::string(yytext));
         if (element != nullptr) { 
             return yy::genesyspp_parser::make_RESOURCE(obj_t(0, Util::TypeOf<Resource>(), element->getId()),loc);
         }
-        
-        // check SET
-        //element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<Set>(), std::string(yytext));
-        //if (element != nullptr) { 
-        //    return yy::genesyspp_parser::make_SET(obj_t(0, Util::TypeOf<Set>(), element->getId()),loc);
-        //}
 
+        // Should be definied by plugin SET
+        //check SET
+        element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<Set>(), std::string(yytext));
+        if (element != nullptr) { 
+            return yy::genesyspp_parser::make_SET(obj_t(0, Util::TypeOf<Set>(), element->getId()),loc);
+        }
+
+        // Should be definied by plugin STATISTICSCOLLECTOR
+        //check CSTAT
+        element = driver.getModel()->getElementManager()->getElement(Util::TypeOf<StatisticsCollector>(), std::string(yytext));
+        if (element != nullptr) { 
+            return yy::genesyspp_parser::make_CSTAT(obj_t(0, Util::TypeOf<StatisticsCollector>(), element->getId()),loc);
+        }
+
+	// If no one before has identified this literal, then it is an ILLEGAL (not found) literal 
         //Case not found retturns a illegal token
         return yy::genesyspp_parser::make_ILLEGAL(obj_t(0, std::string("Illegal")), loc);
       }
