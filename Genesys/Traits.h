@@ -32,7 +32,6 @@
 #include "PluginConnector_if.h"
 
 // genesys applications
-#include "TestModels.h"
 #include "FullSimulationOfComplexModel.h"
 #include "BuildSimulationModel03.h"
 #include "FirstExampleOfSimulation.h"
@@ -78,7 +77,7 @@ template <> struct Traits<GenesysApplication_if> {
     //typedef FullSimulationOfComplexModel Application;
     //typedef FirstExampleOfSimulation Application;
     //typedef SecondExampleOfSimulation Application;
-    typedef TestModels Application;
+    typedef FourthExampleOfSimulation Application;
     //typedef TestSimulationControlAndSimulationResponse Application;
 };
 

@@ -334,8 +334,6 @@
         <itemPath>SecondExampleOfSimulation.h</itemPath>
         <itemPath>ThirdExampleOfSimulation.cpp</itemPath>
         <itemPath>ThirdExampleOfSimultion.h</itemPath>
-        <itemPath>TestModels.cpp</itemPath>
-        <itemPath>TestModels.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Tests" projectFiles="true">
         <logicalFolder name="f1" displayName="Oldies" projectFiles="true">
@@ -571,10 +569,6 @@
       <item path="FourthExampleOfSimulation.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="FourthExampleOfSimulation.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestModels.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="TestModels.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Free.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -1177,10 +1171,6 @@
       <item path="FourthExampleOfSimulation.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="FourthExampleOfSimulation.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestModels.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="TestModels.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Free.cpp" ex="false" tool="1" flavor2="0">
       </item>

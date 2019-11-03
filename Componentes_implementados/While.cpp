@@ -5,39 +5,38 @@
  */
 
 /* 
- * File:   Hold.cpp
+ * File:   While.cpp
  * Author: gstvob
  * 
  * Created on 03 de Junho de 2019, 15:20
  */
 
-#include "Hold.h"
+#include "While.h"
 #include "Model.h"
 #include "Attribute.h"
 #include "Resource.h"
-#include "Signal.h"
 
-Hold::Hold(Model* model): ModelComponent(model, Util::TypeOf<Hold>()) {
+While::While(Model* model): ModelComponent(model, Util::TypeOf<While>()) {
    
 } 
 
-Hold::Hold(const Hold& orig) : ModelComponent(orig) {
+While::While(const While& orig) : ModelComponent(orig) {
 }
 
-Hold::~Hold() {
+While::~While() {
 }
 
-std::string Hold::show() {
+std::string While::show() {
     return ModelComponent::show() +
 	    "";
 }
 
-PluginInformation* Hold::GetPluginInformation() {
-    return new PluginInformation(Util::TypeOf<Hold>(), &Hold::LoadInstance);
+PluginInformation* While::GetPluginInformation() {
+    return new PluginInformation(Util::TypeOf<While>(), &While::LoadInstance);
 }
 
-ModelComponent* Hold::LoadInstance(Model* model, std::map<std::string, std::string>* fields) {
-    Hold* newComponent = new Hold(model);
+ModelComponent* While::LoadInstance(Model* model, std::map<std::string, std::string>* fields) {
+    While* newComponent = new While(model);
     try {
 	newComponent->_loadInstance(fields);
     } catch (const std::exception& e) {
@@ -46,15 +45,15 @@ ModelComponent* Hold::LoadInstance(Model* model, std::map<std::string, std::stri
 }
 
 
-void Hold::setWaitForValueExpr(std::string _expr) {
+void While::setWaitForValueExpr(std::string _expr) {
     this->_wait_for_value = _expr;
 }
 
-void Hold::setType(Type _type) {
+void While::setType(Type _type) {
     this->_type = _type;
 }
 
-void Hold::setQueueName(std::string _name) throw() {
+void While::setQueueName(std::string _name) throw() {
     Queue* queue = dynamic_cast<Queue*>(_model->getElementManager()->getElement(Util::TypeOf<Queue>(), _name));
     if (queue != nullptr) {
         _queue = queue;
@@ -63,19 +62,19 @@ void Hold::setQueueName(std::string _name) throw() {
     }
 }
 
-Hold::Type Hold::getType() const {
+While::Type While::getType() const {
     return this->_type;
 }
 
-std::string Hold::getWaitForValueExpr() const {
+std::string While::getWaitForValueExpr() const {
     return this->_wait_for_value;
 }
 
-std::string Hold::getQueueName() const {
+std::string While::getQueueName() const {
     return _queue->getName();
 }
 
-void Hold::_execute(Entity* entity) {
+void While::_execute(Entity* entity) {
     if (_type == Type::ScanForCondition) {
         Waiting* waiting = new Waiting(entity, this, _model->getSimulation()->getSimulatedTime());
         this->_queue->insertElement(waiting);
@@ -94,7 +93,7 @@ void Hold::_execute(Entity* entity) {
     }
 }
 
-void Hold::release_signal(int _limit) {
+void While::release_signal(int _limit) {
 	for(int i = 0; i < _queue->size(); i++) {
 		Waiting* waiting = _queue->getAtRank(i);
 
@@ -105,15 +104,15 @@ void Hold::release_signal(int _limit) {
 	}
 }
 
-void Hold::_initBetweenReplications() {
+void While::_initBetweenReplications() {
     this->_queue->initBetweenReplications();
 }
 
-bool Hold::_loadInstance(std::map<std::string, std::string>* fields) {
+bool While::_loadInstance(std::map<std::string, std::string>* fields) {
     bool res = ModelComponent::_loadInstance(fields);
     if (res) {
         
-        std::string queueName = ((*(fields->find("queueName"))).second);
+        std::string W = ((*(fields->find("queueName"))).second);
 	    Queue* queue = dynamic_cast<Queue*> (_model->getElementManager()->getElement(Util::TypeOf<Queue>(), queueName));
         this->_queue = queue;
         this->_wait_for_value = ((*(fields->find("waitForValue"))).second);
@@ -121,13 +120,13 @@ bool Hold::_loadInstance(std::map<std::string, std::string>* fields) {
     return res;
 }
 
-std::map<std::string, std::string>* Hold::_saveInstance() {
+std::map<std::string, std::string>* While::_saveInstance() {
     std::map<std::string, std::string>* fields = ModelComponent::_saveInstance(); //Util::TypeOf<Seize>());
     fields->emplace("queueName", (this->_queue->getName()));
     fields->emplace("waitForValue", (this->_wait_for_value));
     return fields;
 }
 
-bool Hold::_check(std::string* errorMessage) {
+bool While::_check(std::string* errorMessage) {
     return true;
 }
