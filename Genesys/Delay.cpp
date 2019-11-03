@@ -92,11 +92,11 @@ bool Delay::_check(std::string* errorMessage) {
     std::vector<std::string> neededNames = {"Entity.WaitTime"};
     std::string neededName;
     for (unsigned int i = 0; i < neededNames.size(); i++) {
-	neededName = neededNames[i];
-	if (elements->getElement(Util::TypeOf<Attribute>(), neededName) == nullptr) {
-	    Attribute* attr1 = new Attribute(neededName);
-	    elements->insert(Util::TypeOf<Attribute>(), attr1);
-	}
+        neededName = neededNames[i];
+        if (elements->getElement(Util::TypeOf<Attribute>(), neededName) == nullptr) {
+            Attribute* attr1 = new Attribute(neededName);
+            elements->insert(Util::TypeOf<Attribute>(), attr1);
+        }
     }
     return _model->checkExpression(_delayExpression, "Delay expression", errorMessage);
 }

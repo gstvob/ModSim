@@ -31,45 +31,44 @@ public:
      * While the assign class allows you to perform multiple assignments, the assignment class defines an assignment itself.
      */
     class Assignment {
-    public:
+        public:
 
-	Assignment(DestinationType destinationType, std::string destination, std::string expression) {
-	    this->_destinationType = destinationType;
-	    this->_destination = destination;
-	    this->_expression = expression;
-	    // an assignment is always in the form:
-	    // (destinationType) destination = expression
-	};
-    public:
+        Assignment(DestinationType destinationType, std::string destination, std::string expression) {
+            this->_destinationType = destinationType;
+            this->_destination = destination;
+            this->_expression = expression;
+            // an assignment is always in the form:
+            // (destinationType) destination = expression
+        };
+        public:
 
-	void setDestination(std::string _destination) {
-	    this->_destination = _destination;
-	}
+        void setDestination(std::string _destination) {
+            this->_destination = _destination;
+        }
 
-	std::string getDestination() const {
-	    return _destination;
-	}
+        std::string getDestination() const {
+            return _destination;
+        }
 
-	void setDestinationType(DestinationType _destinationType) {
-	    this->_destinationType = _destinationType;
-	}
+        void setDestinationType(DestinationType _destinationType) {
+            this->_destinationType = _destinationType;
+        }
 
-	DestinationType getDestinationType() const {
-	    return _destinationType;
-	}
+        DestinationType getDestinationType() const {
+            return _destinationType;
+        }
 
-	void setExpression(std::string _expression) {
-	    this->_expression = _expression;
-	}
+        void setExpression(std::string _expression) {
+            this->_expression = _expression;
+        }
 
-	std::string getExpression() const {
-	    return _expression;
-	}
-    private:
-	DestinationType _destinationType = DestinationType::Attribute;
-	std::string _destination = "";
-	std::string _expression = "";
-
+        std::string getExpression() const {
+            return _expression;
+        }
+        private:
+        DestinationType _destinationType = DestinationType::Attribute;
+        std::string _destination = "";
+        std::string _expression = "";
     };
 public:
     Assign(Model* model);
@@ -80,6 +79,8 @@ public:
 public:
     static PluginInformation* GetPluginInformation();
     static ModelComponent* LoadInstance(Model* model, std::map<std::string, std::string>* fields);
+    void set_switch_entity(bool val) {_switch_entity = val; }
+    void set_new_entity(EntityType* entity) {_new_entity = entity; }
 public:
     List<Assignment*>* getAssignments() const;
 protected:
@@ -91,6 +92,8 @@ protected:
 private:
 private:
     List<Assignment*>* _assignments = new List<Assignment*>();
+    bool _switch_entity = false;
+    EntityType* _new_entity;
 };
 
 #endif /* ASSIGN_H */

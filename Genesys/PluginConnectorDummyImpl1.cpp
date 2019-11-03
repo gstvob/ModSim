@@ -29,6 +29,8 @@
 #include "Write.h"
 #include "Hold.h"
 #include "Signal.h"
+#include "While.h"
+#include "Endwhile.h"
 
 // Model elements
 #include "EntityType.h"

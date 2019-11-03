@@ -11,20 +11,20 @@
  * Created on 03 de Junho de 2019, 15:20
  */
 
-#ifndef WHILE_H
-#define WHILE_H
+#ifndef ENDWHILE_H
+#define ENDWHILE_H
 
 #include "ModelComponent.h"
 #include "Plugin.h"
 #include "Queue.h"
-#include "Endwhile.h"
+#include "While.h"
 
-class While : public ModelComponent {
+class Endwhile : public ModelComponent {
 
 public:
-    While(Model* model);
-    While(const While& orig);
-    virtual ~While();
+    Endwhile(Model* model);
+    Endwhile(const Endwhile& orig);
+    virtual ~Endwhile();
 
     virtual std::string show();
     static PluginInformation* GetPluginInformation();
@@ -33,18 +33,17 @@ public:
     void set_label(std::string value) {
         _label = value; 
     }
-    void attach_endwhile(Endwhile* endwhile) { _attached_endwhile = endwhile; }
 
-    void set_condition(std::string expr) {
-        _condition = expr;
-    }
-
-    std::string get_label() {
+    std::string get_label(std::string value) {
         return _label; 
     }
 
-    Endwhile* get_endwhile() {
-        return _attached_endwhile;
+    While* get_while() {
+        return _attached_while;
+    }
+
+    void attach_while(While* the_while) {
+        _attached_while = the_while;
     }
 
 protected:
@@ -55,10 +54,8 @@ protected:
     virtual bool _check(std::string* errorMessage);
 
 private:
-    std::string _condition = "";
     std::string _label = "";
-    Endwhile* _attached_endwhile;
+    While* _attached_while;
 };
 
 #endif /* WHILE_H */
-

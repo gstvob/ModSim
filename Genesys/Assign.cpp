@@ -54,21 +54,24 @@ ModelComponent* Assign::LoadInstance(Model* model, std::map<std::string, std::st
 }
 
 void Assign::_execute(Entity* entity) {
-    Assignment* let;
-    std::list<Assignment*>* lets = this->_assignments->getList();
-    for (std::list<Assignment*>::iterator it = lets->begin(); it != lets->end(); it++) {
-	let = (*it);
-	double value = _model->parseExpression(let->getExpression());
-	_model->getTraceManager()->trace(Util::TraceLevel::blockInternal, "Let \"" + let->getDestination() + "\" = " + std::to_string(value) + "  // " + let->getExpression());
-	/* TODO: this is NOT the best way to do it (enum comparision) */
-	if (let->getDestinationType() == DestinationType::Variable) {
-	    Variable* myvar = (Variable*) this->_model->getElementManager()->getElement(Util::TypeOf<Variable>(), let->getDestination());
-	    myvar->setValue(value);
-	} else if (let->getDestinationType() == DestinationType::Attribute) {
-	    entity->setAttributeValue(let->getDestination(), value);
-	}
+    if (_switch_entity) {
+        entity->setEntityType(_new_entity);
+    } else {
+        Assignment* let;
+        std::list<Assignment*>* lets = this->_assignments->getList();
+        for (std::list<Assignment*>::iterator it = lets->begin(); it != lets->end(); it++) {
+            let = (*it);
+            double value = _model->parseExpression(let->getExpression());
+            _model->getTraceManager()->trace(Util::TraceLevel::blockInternal, "Let \"" + let->getDestination() + "\" = " + std::to_string(value) + "  // " + let->getExpression());
+            /* TODO: this is NOT the best way to do it (enum comparision) */
+            if (let->getDestinationType() == DestinationType::Variable) {
+                Variable* myvar = (Variable*) this->_model->getElementManager()->getElement(Util::TypeOf<Variable>(), let->getDestination());
+                myvar->setValue(value);
+            } else if (let->getDestinationType() == DestinationType::Attribute) {
+                entity->setAttributeValue(let->getDestination(), value);
+            }
+        }
     }
-
     this->_model->sendEntityToComponent(entity, this->getNextComponents()->frontConnection(), 0.0);
 }
 
