@@ -35,9 +35,20 @@ protected:  // virtual
     virtual bool _loadInstance(std::map<std::string, std::string>* fields);
     virtual std::map<std::string, std::string>* _saveInstance();
     virtual bool _check(std::string* errorMessage);
-private: // methods
+public: // methods
+    void setSeparateName(std::string value);
+    void setSplitBatch(bool value);
+    void setAmountToDuplicate(std::string value);
+    void setTakeAllRepresentativeValues(bool value);
+    void setAttributeType(bool value);
+    
 private: // attributes 1:1
 private: // attributes 1:n
+    std::string _amountToDup;
+    std::string _separateName;
+    bool _splitBatch;
+    bool _takeAllRepresentativeValues;
+    bool _attributeType = false;
 };
 
 

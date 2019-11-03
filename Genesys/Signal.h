@@ -18,15 +18,10 @@ public:
     std::string getSignalName() {
         return signalName;
     }
-
-    std::string getQueueName() const;
-    void setQueueName(std::string _name) throw();
-
 private:
     int limit = 10;
     std::string signalName;
-    Queue* _holds_waiting_signal;
-    
+
 protected:
     virtual void _execute(Entity* entity);
     virtual void _initBetweenReplications();

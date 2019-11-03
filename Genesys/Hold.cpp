@@ -87,17 +87,14 @@ void Hold::_execute(Entity* entity) {
         }
     }
     else if (_type == Type::WaitForSignal) {
-        Queue* signal_queue = dynamic_cast<Queue*>(_model->getElementManager()->getElement(Util::TypeOf<Queue>(), _wait_for_value));
         Waiting* waiting = new Waiting(entity, this, _model->getSimulation()->getSimulatedTime());
         this->_queue->insertElement(waiting);
-        signal_queue->insertElement(waiting);        
     }
 }
 
 void Hold::release_signal(int _limit) {
 	for(int i = 0; i < _queue->size(); i++) {
 		Waiting* waiting = _queue->getAtRank(i);
-
 		_model->sendEntityToComponent(waiting->getEntity(), this->getNextComponents()->front(), 0.0);
 		if (i >= _limit) {
 			break;

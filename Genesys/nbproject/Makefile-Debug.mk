@@ -149,6 +149,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/TestSimulationControlAndSimulationResponse.o \
 	${OBJECTDIR}/TestStatistics.o \
 	${OBJECTDIR}/ThirdExampleOfSimulation.o \
+	${OBJECTDIR}/TestSignal.o \
 	${OBJECTDIR}/ToolManager.o \
 	${OBJECTDIR}/TraceManager.o \
 	${OBJECTDIR}/Unstore.o \
@@ -756,6 +757,11 @@ ${OBJECTDIR}/ThirdExampleOfSimulation.o: ThirdExampleOfSimulation.cpp nbproject/
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ThirdExampleOfSimulation.o ThirdExampleOfSimulation.cpp
+
+${OBJECTDIR}/TestSignal.o: TestSignal.cpp nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestSignal.o TestSignal.cpp
 
 ${OBJECTDIR}/ToolManager.o: ToolManager.cpp nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
