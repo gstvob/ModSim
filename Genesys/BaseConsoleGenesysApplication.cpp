@@ -150,4 +150,6 @@ void BaseConsoleGenesysApplication::insertFakePluginsByHand(Simulator* simulator
     simulator->getPluginManager()->insert("markovchain.so");
     simulator->getPluginManager()->insert("cellularautomata.so");
     simulator->getPluginManager()->insert("cppforgenesys.so");
+    simulator->getPluginManager()->insert("while.so");
+    simulator->getPluginManager()->insert("endwhile.so");
 }

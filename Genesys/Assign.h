@@ -24,7 +24,7 @@ public:
 
     /* TODO: +- an enun is not a good idea. Should be a list of possible classes, so TypeOf could be set */
     enum class DestinationType : int {
-	Attribute=0, Variable=1
+	Attribute=0, Variable=1, Entity=2
     };
 
     /*!
@@ -40,6 +40,22 @@ public:
             // an assignment is always in the form:
             // (destinationType) destination = expression
         };
+
+        Assignment(DestinationType destinationType, std::string destination, std::string expression, std::string row, std::string column) {
+            this->_destinationType = destinationType;
+            this->_destination = destination;
+            this->_expression = expression;
+            this->_row = row;
+            this->_column = column;
+        };
+
+        Assignment(EntityType* switch_type) {
+            _new_entity = switch_type;
+            _destinationType = DestinationType::Entity;
+        };
+        
+
+
         public:
 
         void setDestination(std::string _destination) {
@@ -65,10 +81,39 @@ public:
         std::string getExpression() const {
             return _expression;
         }
+
+        void setRow(std::string row) {
+            _row = row;
+        }
+
+        std::string getRow() {
+            return _row;
+        }
+
+        void setColumn(std::string column) {
+            _column = column;
+        }
+
+        std::string getColumn() {
+            return _column;
+        }
+
+        void setEntityType(EntityType* n) {
+            _new_entity = n;
+        }
+
+        EntityType* new_entity() {
+            return _new_entity;
+        }
+
         private:
         DestinationType _destinationType = DestinationType::Attribute;
         std::string _destination = "";
         std::string _expression = "";
+        std::string _row = "";
+        std::string _column = "";
+        EntityType* _new_entity;
+
     };
 public:
     Assign(Model* model);
@@ -79,8 +124,6 @@ public:
 public:
     static PluginInformation* GetPluginInformation();
     static ModelComponent* LoadInstance(Model* model, std::map<std::string, std::string>* fields);
-    void set_switch_entity(bool val) {_switch_entity = val; }
-    void set_new_entity(EntityType* entity) {_new_entity = entity; }
 public:
     List<Assignment*>* getAssignments() const;
 protected:
@@ -92,8 +135,6 @@ protected:
 private:
 private:
     List<Assignment*>* _assignments = new List<Assignment*>();
-    bool _switch_entity = false;
-    EntityType* _new_entity;
 };
 
 #endif /* ASSIGN_H */

@@ -150,12 +150,17 @@ OBJECTFILES= \
 	${OBJECTDIR}/TestStatistics.o \
 	${OBJECTDIR}/ThirdExampleOfSimulation.o \
 	${OBJECTDIR}/TestSignal.o \
+	${OBJECTDIR}/TestMore.o \
+	${OBJECTDIR}/TestWhile.o \
+	${OBJECTDIR}/PP4Model1.o \
 	${OBJECTDIR}/ToolManager.o \
 	${OBJECTDIR}/TraceManager.o \
 	${OBJECTDIR}/Unstore.o \
 	${OBJECTDIR}/Util.o \
 	${OBJECTDIR}/Variable.o \
 	${OBJECTDIR}/Write.o \
+	${OBJECTDIR}/While.o \
+	${OBJECTDIR}/Endwhile.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/parserBisonFlex/Genesys++-driver.o \
 	${OBJECTDIR}/parserBisonFlex/Genesys++-scanner.o \
@@ -763,6 +768,21 @@ ${OBJECTDIR}/TestSignal.o: TestSignal.cpp nbproject/Makefile-${CND_CONF}.mk
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestSignal.o TestSignal.cpp
 
+${OBJECTDIR}/TestWhile.o: TestWhile.cpp nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestWhile.o TestWhile.cpp
+
+${OBJECTDIR}/TestMore.o: TestMore.cpp nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestMore.o TestMore.cpp
+
+${OBJECTDIR}/PP4Model1.o: PP4Model1.cpp nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PP4Model1.o PP4Model1.cpp
+
 ${OBJECTDIR}/ToolManager.o: ToolManager.cpp nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -792,6 +812,16 @@ ${OBJECTDIR}/Write.o: Write.cpp nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Write.o Write.cpp
+
+${OBJECTDIR}/While.o: While.cpp nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/While.o While.cpp
+
+${OBJECTDIR}/Endwhile.o: Endwhile.cpp nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Endwhile.o Endwhile.cpp
 
 ${OBJECTDIR}/main.o: main.cpp nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}

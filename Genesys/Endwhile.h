@@ -17,10 +17,8 @@
 #include "ModelComponent.h"
 #include "Plugin.h"
 #include "Queue.h"
-#include "While.h"
 
 class Endwhile : public ModelComponent {
-
 public:
     Endwhile(Model* model);
     Endwhile(const Endwhile& orig);
@@ -38,12 +36,8 @@ public:
         return _label; 
     }
 
-    While* get_while() {
-        return _attached_while;
-    }
-
-    void attach_while(While* the_while) {
-        _attached_while = the_while;
+    void attach_while(ModelComponent* the_while) {
+        this->_attached_while = the_while;
     }
 
 protected:
@@ -55,7 +49,7 @@ protected:
 
 private:
     std::string _label = "";
-    While* _attached_while;
+    ModelComponent* _attached_while;
 };
 
-#endif /* WHILE_H */
+#endif /* ENDWHILE_H */

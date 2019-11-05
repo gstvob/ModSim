@@ -35,6 +35,7 @@ public:
     void removeElement(Entity* element);
     unsigned int size();
     Entity* first();
+    List<Entity*>* getList();
 public:
     void initBetweenReplications();
 protected:
@@ -53,4 +54,3 @@ private: //1::1
 };
 
 #endif /* ENTITYGROUP_H */
-

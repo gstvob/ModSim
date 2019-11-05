@@ -39,10 +39,13 @@
 #include "ThirdExampleOfSimultion.h"
 #include "FourthExampleOfSimulation.h"
 #include "TestSignal.h"
+#include "TestWhile.h"
+#include "TestMore.h"
 #include "GenesysGUI.h"
 #include "GenesysConsole.h"
 #include "TestEnterLeaveRoute.h"
 #include "TestSimulationControlAndSimulationResponse.h"
+#include "PP4Model1.h"
 
 //  Default implementations
 //statistics
@@ -80,7 +83,8 @@ template <> struct Traits<GenesysApplication_if> {
     //typedef SecondExampleOfSimulation Application;
     //typedef FourthExampleOfSimulation Application;
     //typedef TestSimulationControlAndSimulationResponse Application;
-    typedef TestSignal Application;
+    //typedef TestSignal Application;
+    typedef PP4Model1 Application;
 };
 
 

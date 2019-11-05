@@ -115,6 +115,10 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
     GetInfo = &Hold::GetPluginInformation;
     else if (fn=="signal.so")
     GetInfo = &Signal::GetPluginInformation;
+    else if (fn=="while.so")
+    GetInfo = &While::GetPluginInformation;
+    else if (fn=="endwhile.so")
+    GetInfo = &Endwhile::GetPluginInformation;
 
     if (GetInfo != nullptr) {
 	pluginResult = new Plugin(GetInfo);

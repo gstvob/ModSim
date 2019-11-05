@@ -35,7 +35,7 @@ public:
     double getValue(std::string index);
     void setValue(double value);
     void setValue(std::string index, double value);
-
+    
 protected:
     virtual bool _loadInstance(std::map<std::string, std::string>* fields);
     virtual std::map<std::string, std::string>* _saveInstance();

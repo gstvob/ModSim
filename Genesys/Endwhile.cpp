@@ -11,7 +11,7 @@
  * Created on 03 de Junho de 2019, 15:20
  */
 
-#include "While.h"
+#include "Endwhile.h"
 #include "Model.h"
 #include "Attribute.h"
 #include "Resource.h"
@@ -32,7 +32,7 @@ std::string Endwhile::show() {
 }
 
 PluginInformation* Endwhile::GetPluginInformation() {
-    return new PluginInformation(Util::TypeOf<While>(), &While::LoadInstance);
+    return new PluginInformation(Util::TypeOf<Endwhile>(), &Endwhile::LoadInstance);
 }
 
 ModelComponent* Endwhile::LoadInstance(Model* model, std::map<std::string, std::string>* fields) {

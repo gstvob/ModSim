@@ -99,22 +99,39 @@ int PP4Model1::main(int argc, char** argv) {
     Resource* mmu = new Resource(elements, "MMU");
     mmu->setCapacity(1);
     elements->insert(Util::TypeOf<Resource>(), mmu);
-    //later
-    Variable* var1 = new Variable("varNextIndex");
-    elements->insert(Util::TypeOf<Variable>(), var1);
 
-    /*
-        ADVANCED TEST
-    */
-
-    /*
-        Expression
-    */
-
-    /*
-        STATISTICS
-    */
-    //
+    Variable* memorySize = new Variable("MemorySize");
+    Variable* pageSize = new Variable("PageSize");
+    Variable* processCount = new Variable("ProcessCount");
+    Variable* processMaxCount = new Variable("ProcessMaxCount");
+    Variable* tlbVar = new Variable("TLB"); // 6rows, 2 columns
+    Variable* diskTransferRate = new Variable("DiskTransferRate");
+    Variable* TLBi = new Variable("TLBi");
+    Variable* TLBmin = new Variable("TLBmin");
+    Variable* pageTables = new Variable("PageTables");
+    Variable* mainMemory = new Variable("MainMemory");
+    Variable* memToRemove = new Variable("MemToRemove");
+    Variable* MEMi = new Variable("MEMi");
+    Variable* MEMusage = new Variable("MEMusage");
+    Variable* breakLoop = new Variable("BreakLoop");
+    Variable* suspend = new Variable("Suspend");
+    Variable* tlbHits = new Variable("TLBhits");
+    elements->insert(Util::TypeOf<Variable>(), memorySize);
+    elements->insert(Util::TypeOf<Variable>(), pageSize);
+    elements->insert(Util::TypeOf<Variable>(), processCount);
+    elements->insert(Util::TypeOf<Variable>(), processMaxCount);
+    elements->insert(Util::TypeOf<Variable>(), tlbVar);
+    elements->insert(Util::TypeOf<Variable>(), diskTransferRate);
+    elements->insert(Util::TypeOf<Variable>(), TLBi);
+    elements->insert(Util::TypeOf<Variable>(), TLBmin);
+    elements->insert(Util::TypeOf<Variable>(), pageTables);
+    elements->insert(Util::TypeOf<Variable>(), mainMemory);
+    elements->insert(Util::TypeOf<Variable>(), memToRemove);
+    elements->insert(Util::TypeOf<Variable>(), MEMi);
+    elements->insert(Util::TypeOf<Variable>(), MEMusage);
+    elements->insert(Util::TypeOf<Variable>(), breakLoop);
+    elements->insert(Util::TypeOf<Variable>(), suspend);
+    elements->insert(Util::TypeOf<Variable>(), tlbHits);
 
 
     /*
@@ -128,8 +145,14 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(createInits);
 
     Assign* startProcess = new Assign(model);
-    startProcess->set_switch_entity(true);
-    startProcess->set_new_entity(process);
+    Assign::Assignment* switch_entity = new Assign::Assignment(process);
+    Assign::Assignment* processCountInc = new Assign::Assignment(Assign::DestinationType::Variable, "ProcessCount", "ProcessCount + 1"); 
+    Assign::Assignment* pidAtt = new Assign::Assignment(Assign::DestinationType::Attribute, "pid", "ProcessCount");
+    Assign::Assignment* pageNumberAtt = new Assign::Assignment(Assign::DestinationType::Attribute, "PageNumber", "AINT(UNIF(1, PageCount))"); 
+    startProcess->getAssignments()->insert(switch_entity);
+    startProcess->getAssignments()->insert(processCountInc);
+    startProcess->getAssignments()->insert(pidAtt);
+    startProcess->getAssignments()->insert(pageNumberAtt);
     components->insert(startProcess);
 
     Station* processLoopStation = new Station(elements, "ProcLoop");
@@ -177,8 +200,8 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(hold1);
 
     Assign* assignAccessType = new Assign(model);
-    assignAccessType->set_switch_entity(true);
-    assignAccessType->set_new_entity(memoryAccess);
+    Assign::Assignment* assignAccessTypeAssignment = new Assign::Assignment(memoryAccess);
+    assignAccessType->getAssignments()->insert(assignAccessTypeAssignment);
     components->insert(assignAccessType);
 
     Station* startMemAccessStation = new Station(elements, "StartMemAccessStation");
@@ -196,7 +219,7 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(decideSuspend);
     
     Assign* resetSuspend = new Assign(model);
-    Assign::Assignment* resetSuspendAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "suspend", "0");
+    Assign::Assignment* resetSuspendAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "Suspend", "0");
     resetSuspend->getAssignments()->insert(resetSuspendAssignment);
     components->insert(resetSuspend); 
 
@@ -240,10 +263,10 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(delayTLB);
 
     Search* searchTLB = new Search(model);
-    searchTLB->setType(2);
-    searchTLB->setSearchCondition("TLB(J, pid) == PageNumber");
+/*    searchTLB->setType(2);
+    searchTLB->setSearchCondition("TLB[J, pid] == PageNumber");
     searchTLB->setStartingRank("1");
-    searchTLB->setEndingRank("TLB.size");
+    searchTLB->setEndingRank("TLB.size");*/
     components->insert(searchTLB);
 
     Delay* delayRAM = new Delay(model);
@@ -267,7 +290,7 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(routeEndAccess);
 
     Assign* assignPhysAddr = new Assign(model);
-    Assign::Assignment* assignPhysAddrAssignment = new Assign::Assignment(Assign::DestinationType::Attribute, "PhysAddr", "PhysAddr+1");
+    Assign::Assignment* assignPhysAddrAssignment = new Assign::Assignment(Assign::DestinationType::Attribute, "PhysAddr", "PageTables[pid*PageNumber, 2]");
     assignPhysAddr->getAssignments()->insert(assignPhysAddrAssignment);
     components->insert(assignPhysAddr);
 
@@ -315,7 +338,7 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(endAccess);
 
     Assign* updatePageTable = new Assign(model);
-    Assign::Assignment* updatePageTableAssignment = new Assign::Assignment(Assign::DestinationType::Attribute, "PageTables.pid", "PageTables.pid+1");
+    Assign::Assignment* updatePageTableAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "PageTables", "PageTables[pid*PageNumber,1]+1", "pid * PageNumber","1");
     updatePageTable->getAssignments()->insert(updatePageTableAssignment);
     components->insert(updatePageTable);
     
@@ -344,8 +367,13 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(updateTLB);
 
     Assign* initLoop = new Assign(model);
-    Assign::Assignment* initLoopAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "TLB.i", "1");
-    initLoop->getAssignments()->insert(initLoopAssignment);
+    Assign::Assignment* initLoopAssignment1 = new Assign::Assignment(Assign::DestinationType::Variable, "TLBi", "1");
+    Assign::Assignment* initLoopAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "TLBmin", "1");
+    Assign::Assignment* initLoopAssignment3 = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "0");
+
+    initLoop->getAssignments()->insert(initLoopAssignment1);
+    initLoop->getAssignments()->insert(initLoopAssignment2);
+    initLoop->getAssignments()->insert(initLoopAssignment3);
     components->insert(initLoop);
 
     /*
@@ -356,38 +384,42 @@ int PP4Model1::main(int argc, char** argv) {
     While* while1 = new While(model);
     Endwhile* endwhile1 = new Endwhile(model);
 
-    while1->set_condition("(TLB.i <= TLB.size) && (BreakLoop == 0)");
+    while1->set_condition("(TLBi <= TLBsize) && (BreakLoop == 0)");
     while1->attach_endwhile(endwhile1);
     endwhile1->attach_while(while1);
     components->insert(while1);
     components->insert(endwhile1);
 
     Decide * tlbRowNotEmpty = new Decide(model);
-    tlbRowNotEmpty->getConditions()->insert("TLB(TLB.i, pid) != 0"); // variavel com duas dimensões
+    tlbRowNotEmpty->getConditions()->insert("TLB[TLBi, pid] != 0");
     components->insert(tlbRowNotEmpty);
 
     Assign* breakA = new Assign(model);
     Assign::Assignment* breakAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "1");
+    Assign::Assignment* breakAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "TLBi", "TLBmin");
     breakA->getAssignments()->insert(breakAssignment);
+    breakA->getAssignments()->insert(breakAssignment2);
     components->insert(breakA);
 
     Decide * decideMenor = new Decide(model);
-    decideMenor->getConditions()->insert("TLB(TLB.i, pid) != 0"); // variavel com duas dimensões
+    decideMenor->getConditions()->insert("PageTables[pid*TLB[TLBi, pid],1] <  PageTables[pid*TLB[TLBmin, pid],1]"); 
     components->insert(decideMenor);
 
     Assign* assignMin = new Assign(model);
-    Assign::Assignment* assignMinAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "TLB.i", "TLB.min");
+    Assign::Assignment* assignMinAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "TLBi", "TLBmin");
     assignMin->getAssignments()->insert(assignMinAssignment);
     components->insert(assignMin);
 
     Assign* incTLBi = new Assign(model);
-    Assign::Assignment* incTLBiAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "TLB.i", "TLB.i+1");
+    Assign::Assignment* incTLBiAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "TLBi", "TLBi+1");
     incTLBi->getAssignments()->insert(incTLBiAssignment);
     components->insert(incTLBi);
 
     Assign* replaceTLBEntry = new Assign(model);
     Assign::Assignment* replaceTLBEntryAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "0");
+    Assign::Assignment* replaceTLBEntryAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "TLB", "PageNumber", "TLBmin", "pid");
     replaceTLBEntry->getAssignments()->insert(replaceTLBEntryAssignment);
+    replaceTLBEntry->getAssignments()->insert(replaceTLBEntryAssignment2);
     components->insert(replaceTLBEntry);
 
 
@@ -426,40 +458,50 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(updateMEM);
 
     Assign* initLoopM = new Assign(model);
-    Assign::Assignment* initLoopMAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "Mem.toremove", "1");
+    Assign::Assignment* initLoopMAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "MemToRemove", "1");
+    Assign::Assignment* initLoopMAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "MEMi", "1");
+    Assign::Assignment* initLoopMAssignment3 = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "0");
+
     initLoopM->getAssignments()->insert(initLoopMAssignment);
+    initLoopM->getAssignments()->insert(initLoopMAssignment2);
+    initLoopM->getAssignments()->insert(initLoopMAssignment3);
+
     components->insert(initLoopM);
 
     While* while2 = new While(model);
     Endwhile* endwhile2 = new Endwhile(model);
-    while2->set_condition("(Mem.i <= PageCount) && (BreakLoop == 0)");
+    while2->set_condition("(MEMi <= PageCount) && (BreakLoop == 0)");
     while2->attach_endwhile(endwhile2);
     endwhile2->attach_while(while2);
     components->insert(while2);
     components->insert(endwhile2);
     
     Decide* frameBufferNotEmpty = new Decide(model);
-    frameBufferNotEmpty->getConditions()->insert("MainMemory(Mem.i, 1) != 0");
+    frameBufferNotEmpty->getConditions()->insert("MainMemory[MEMi, 1] != 0");
     components->insert(frameBufferNotEmpty);
 
     Decide* decideUpdateMemtoremove = new Decide(model);
-    decideUpdateMemtoremove->getConditions()->insert("VARias COISA");
+    decideUpdateMemtoremove->getConditions()->insert("PageTables[MainMemory[MEMi,1]*MainMemory[MEMi,2],1] <  PageTables[MainMemory[MemToRemove,1]*MainMemory[MemToRemove,2],1]");
     components->insert(decideUpdateMemtoremove);
 
-    Assign* memToRemove = new Assign(model);
-    Assign::Assignment* memToRemoveAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "Mem.toremove", "Mem.i");
-    memToRemove->getAssignments()->insert(memToRemoveAssignment);
-    components->insert(memToRemove);
+    Assign* memToRemoveA = new Assign(model);
+    Assign::Assignment* memToRemoveAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "MemToRemove", "MEMi");
+    memToRemoveA->getAssignments()->insert(memToRemoveAssignment);
+    components->insert(memToRemoveA);
     
     Assign* memI = new Assign(model);
-    Assign::Assignment* memIAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "Mem.i", "Mem.i+1");
+    Assign::Assignment* memIAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "MEMi", "MEMi+1");
     memI->getAssignments()->insert(memIAssignment);
     components->insert(memI);
 
-    Assign* breakLoop = new Assign(model);
+    Assign* breakLoopA = new Assign(model);
     Assign::Assignment* breakLoopAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "1");
-    breakLoop->getAssignments()->insert(breakLoopAssignment);
-    components->insert(breakLoop);
+    Assign::Assignment* breakLoopAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "MemToRemove", "MEMi");
+
+    breakLoopA->getAssignments()->insert(breakLoopAssignment);
+    breakLoopA->getAssignments()->insert(breakLoopAssignment2);
+
+    components->insert(breakLoopA);
 
     /*
         Algoritmo de sub pt2
@@ -471,23 +513,23 @@ int PP4Model1::main(int argc, char** argv) {
 
     Assign* assignSuspend = new Assign(model);
     Assign::Assignment* assignSuspendAssignment1 = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "0");
-    Assign::Assignment* assignSuspendAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "suspend", "1");
+    Assign::Assignment* assignSuspendAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "Suspend", "1");
     assignSuspend->getAssignments()->insert(assignSuspendAssignment1);
     assignSuspend->getAssignments()->insert(assignSuspendAssignment2);
     components->insert(assignSuspend);
 
     Decide* memToRemoveEmpty = new Decide(model);
-    memToRemoveEmpty->getConditions()->insert("MainMemory(Mem.toremove, 1) == 0");
+    memToRemoveEmpty->getConditions()->insert("MainMemory[MemToRemove,1] == 0");
     components->insert(memToRemoveEmpty);
 
     Assign* increaseMemUsage = new Assign(model);
-    Assign::Assignment* increaseMemUsageAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "Mem.usage", "Mem.usage+1");
+    Assign::Assignment* increaseMemUsageAssignment = new Assign::Assignment(Assign::DestinationType::Variable, "MEMusage", "MEMusage+1");
     increaseMemUsage->getAssignments()->insert(increaseMemUsageAssignment);
     components->insert(increaseMemUsage);
 
     Assign* clearPageTableEntry = new Assign(model);
-    Assign::Assignment* clearPageTableEntryAssignment1 = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "0"); // AQUELES VAR LOCO
-    Assign::Assignment* clearPageTableEntryAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "suspend", "1");
+    Assign::Assignment* clearPageTableEntryAssignment1 = new Assign::Assignment(Assign::DestinationType::Variable, "PageTables[MainMemory[MemToRemove,1]*MainMemory[MemToRemove,2],1]", "0"); // AQUELES VAR LOCO
+    Assign::Assignment* clearPageTableEntryAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "PageTables[MainMemory[MemToRemove,1]*MainMemory[MemToRemove,2],2]", "0");
     clearPageTableEntry->getAssignments()->insert(clearPageTableEntryAssignment1);
     clearPageTableEntry->getAssignments()->insert(clearPageTableEntryAssignment2);
     components->insert(clearPageTableEntry);
@@ -497,20 +539,24 @@ int PP4Model1::main(int argc, char** argv) {
     components->insert(decidePageChanged);
 
     Delay* delaySavePageToDisk = new Delay(model);
-    delaySavePageToDisk->setDelayExpression("(PageSize / 1024) * DiskTransferRate * "); //mais algumas coisas.
+    delaySavePageToDisk->setDelayExpression("(PageSize / 1024) * DiskTransferRate * 1"); //mais algumas coisas.
     components->insert(delaySavePageToDisk);
 
     Assign* replaceFrameBuffer = new Assign(model);
-    Assign::Assignment* replaceFrameBufferAssignment1 = new Assign::Assignment(Assign::DestinationType::Variable, "BreakLoop", "0");// mais assigns esquisitos.
-    Assign::Assignment* replaceFrameBufferAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "suspend", "1");
-    Assign::Assignment* replaceFrameBufferAssignment3 = new Assign::Assignment(Assign::DestinationType::Variable, "suspend", "1");
+    Assign::Assignment* replaceFrameBufferAssignment1 = new Assign::Assignment(Assign::DestinationType::Variable, "MainMemory", "MemToRemove", "1", "pid");// mais assigns esquisitos.
+    Assign::Assignment* replaceFrameBufferAssignment2 = new Assign::Assignment(Assign::DestinationType::Variable, "MainMemory", "MemToRemove", "2", "PageNumber");
+    Assign::Assignment* replaceFrameBufferAssignment3 = new Assign::Assignment(Assign::DestinationType::Attribute, "PhysAddr", "MemToRemove");
+    Assign::Assignment* replaceFrameBufferAssignment4 = new Assign::Assignment(Assign::DestinationType::Variable, "PageTables", "MemToRemove", "pid*PageNumber", "2");
+
     replaceFrameBuffer->getAssignments()->insert(replaceFrameBufferAssignment1);
     replaceFrameBuffer->getAssignments()->insert(replaceFrameBufferAssignment2);
     replaceFrameBuffer->getAssignments()->insert(replaceFrameBufferAssignment3);
+    replaceFrameBuffer->getAssignments()->insert(replaceFrameBufferAssignment4);
+
     components->insert(replaceFrameBuffer);
 
     Delay* delayDisco = new Delay(model);
-    delayDisco->setDelayExpression("(PageSize / 1024) * DiskTransferRate * "); //mais algumas coisas.
+    delayDisco->setDelayExpression("(PageSize / 1024) * DiskTransferRate * 1"); //mais algumas coisas.
     components->insert(delayDisco);
 
     Signal* signalResumeProcess = new Signal(model);
@@ -527,11 +573,11 @@ int PP4Model1::main(int argc, char** argv) {
     initLoopM->getNextComponents()->insert(while2);
     while2->getNextComponents()->insert(frameBufferNotEmpty);
     frameBufferNotEmpty->getNextComponents()->insert(decideUpdateMemtoremove);
-    frameBufferNotEmpty->getNextComponents()->insert(breakLoop);
-    breakLoop->getNextComponents()->insert(endwhile2);
-    decideUpdateMemtoremove->getNextComponents()->insert(memToRemove);
+    frameBufferNotEmpty->getNextComponents()->insert(breakLoopA);
+    breakLoopA->getNextComponents()->insert(endwhile2);
+    decideUpdateMemtoremove->getNextComponents()->insert(memToRemoveA);
     decideUpdateMemtoremove->getNextComponents()->insert(memI);
-    memToRemove->getNextComponents()->insert(memI);
+    memToRemoveA->getNextComponents()->insert(memI);
     memI->getNextComponents()->insert(endwhile2);
     endwhile2->getNextComponents()->insert(signalSuspendProcess);
     signalSuspendProcess->getNextComponents()->insert(assignSuspend);
