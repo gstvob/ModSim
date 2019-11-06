@@ -1,0 +1,40 @@
+# Genesys simulation model 
+# Last saved on Wed Nov  6 02:51:59 2019
+# simulator infos
+name=ReGenESyS - Reborn Generic and Expansible System Simulator; typename=SimulatorInfo; version=190909; 
+
+# model infos
+analystName=; description=; name=Model 1; numberOfReplications=30; projectTitle=; replicationLength=20.000000; replicationLengthTimeUnit=7; terminatingCondition=; typename=ModelInfo; version=1.0; warmUpTime=0.000000; warmUpTimeTimeUnit=5; 
+
+# model elements
+attributeName=; id=10; name=Queue_HOLD_1; orderRule=1; typename=Queue; 
+
+attributeName=; id=13; name=Queue_SEIZE_1; orderRule=1; typename=Queue; 
+
+capacity=1; costBusyHour=1.000000; costIdleHour=1.000000; costPerUse=1.000000; id=2; name=test_res; typename=Resource; 
+
+id=1; initialNVACost=0.000000; initialOtherCost=0.000000; initialPicture=report; initialVACost=0.000000; initialWaitingCost=0.000000; name=Entity; typename=EntityType; 
+
+id=27; name=Entity.ArrivalTime; typename=Attribute; 
+
+id=28; name=Entity.WaitTime; typename=Attribute; 
+
+# model components
+allocationType=0; id=16; name=Seize_1; nextId0=17; nextSize=1; priority==2; quantity=1; queueId=13; queueName=Queue_SEIZE_1; resourceId=2; resourceName=test_res; resourceType=2; rule=4; saveAttribute=; typename=Seize; 
+
+delayExpression=25; delayExpressionTimeUnit=6; id=20; name=Delay_1; nextId0=21; nextSize=1; typename=Delay; 
+
+entitiesPerCreation=1; entityTypename=Entity; firstCreation=0.000000; id=6; maxCreations=4294967295; name=Create_1; nextId0=16; nextSize=1; timeBetweenCreations=10; timeBetweenCreationsTimeUnit=6; typename=Create; 
+
+entitiesPerCreation=1; entityTypename=Entity; firstCreation=0.000000; id=8; maxCreations=4294967295; name=Create_2; nextId0=22; nextSize=1; timeBetweenCreations=15; timeBetweenCreationsTimeUnit=6; typename=Create; 
+
+id=17; name=Hold_1; nextId0=20; nextSize=1; queueName=Queue_HOLD_1; typename=Hold; waitForValue=signal; 
+
+id=18; name=Dispose_1; nextSize=0; typename=Dispose; 
+
+id=21; name=Release_1; nextId0=18; nextSize=1; priority=0; quantity=1; resourceId=2; resourceName=test_res; resourceType=2; rule=4; saveAttribute=; typename=Release; 
+
+id=22; name=Signal_1; nextId0=23; nextSize=1; typename=Signal; 
+
+id=23; name=Dispose_2; nextSize=0; typename=Dispose; 
+

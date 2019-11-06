@@ -1,0 +1,75 @@
+|  Begin of Report for replication 30 of 30
+|  |  Statistis for Create:
+|  |  |  Create_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 48          
+|  |  |  Create_2:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 33          
+|  |  Statistis for Dispose:
+|  |  |  Dispose_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_1.Count_number_out............. 0           
+|  |  |  Dispose_2:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_2.Count_number_out............. 0           
+|  |  Statistis for EntityType:
+|  |  |  Entity:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Entity.Total_Time...................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_1.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Queue:
+|  |  |  Queue_HOLD_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Queue_HOLD_1.Number_In_Queue........... 1           1.000000    1.000000    1.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Queue_HOLD_1.Time_In_Queue............. 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Queue_SEIZE_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Queue_SEIZE_1.Number_In_Queue.......... 47          1.000000    47.000000   24.000000   184.000000  13.564660   0.565194    3.878074    0.950000    
+|  |  |  |  Queue_SEIZE_1.Time_In_Queue............ 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Resource:
+|  |  |  test_res:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  test_res.Time_Seized................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  test_res.Seizes........................ 1           
+|  |  |  |  test_res.Releases...................... 0           
+|  End of Report for replication 30 of 30
+|  ------------------------------
+|  
+|  Begin of Report for Simulation (based on 30 replications)
+|  |  Statistis for Create:
+|  |  |  Create_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 30          48.000000   48.000000   48.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Create_2:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 30          33.000000   33.000000   33.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Dispose:
+|  |  |  Dispose_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_1.Count_number_out............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Dispose_2:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_2.Count_number_out............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for EntityType:
+|  |  |  Entity:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Entity.Total_Time...................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_1.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Queue:
+|  |  |  Queue_HOLD_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Queue_HOLD_1.Number_In_Queue........... 30          1.000000    1.000000    1.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Queue_HOLD_1.Time_In_Queue............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Queue_SEIZE_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Queue_SEIZE_1.Number_In_Queue.......... 30          24.000000   24.000000   24.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Queue_SEIZE_1.Time_In_Queue............ 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Resource:
+|  |  |  test_res:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  test_res.Time_Seized................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  test_res.Seizes........................ 30          1.000000    1.000000    1.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  test_res.Releases...................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  End of Report for Simulation
+Simulation of model "Model 1" has finished.

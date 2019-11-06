@@ -1,0 +1,178 @@
+|  
+|  Begin of Report for replication 30 of 30
+|  |  Statistis for Create:
+|  |  |  Create_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 126         
+|  |  Statistis for Dispose:
+|  |  |  Dispose_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_1.Count_number_out............. 0           
+|  |  Statistis for EntityType:
+|  |  |  Init:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Delay_1.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_2.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_3.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_4.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Init.Total_Time........................ 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_5.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_6.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_7.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Transfer Time.......................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Time in Stations....................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Memory Access:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Delay_1.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_2.Waiting_Time................... 62          0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  Delay_3.Waiting_Time................... 62          0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  Delay_4.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Memory Access.Total_Time............... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_5.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_6.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_7.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Transfer Time.......................... 124         0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Time in Stations....................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Process:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Delay_1.Waiting_Time................... 126         0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  Delay_2.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_3.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_4.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Process.Total_Time..................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_5.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_6.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_7.Waiting_Time................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Transfer Time.......................... 126         0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Time in Stations....................... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Queue:
+|  |  |  HoldProcessMMUQueue:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  HoldProcessMMUQueue.Number_In_Queue.... 62          1.000000    62.000000   31.500000   320.250000  17.895530   0.568112    4.454560    0.950000    
+|  |  |  |  HoldProcessMMUQueue.Time_In_Queue...... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  HoldSuspendedQueue:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  HoldSuspendedQueue.Number_In_Queue..... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  HoldSuspendedQueue.Time_In_Queue....... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  SeizeMMUQueue:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  SeizeMMUQueue.Number_In_Queue.......... 114         0.000000    31.000000   10.921053   77.020083   8.776109    0.803595    1.611037    0.950000    
+|  |  |  |  SeizeMMUQueue.Time_In_Queue............ 57          0.000000    0.000000    0.000000    0.000000    0.000000    0.767167    0.000000    0.950000    
+|  |  Statistis for Resource:
+|  |  |  MMU:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  MMU.Time_Seized........................ 62          0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  MMU.Seizes............................. 62          
+|  |  |  |  MMU.Releases........................... 62          
+|  |  Statistis for Station:
+|  |  |  ProcLoop:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  ProcLoop.Number_In_Station............. 126         3655.000000 3780.000000 3717.500000 1322.916667 36.371921   0.009784    6.350926    0.950000    
+|  |  |  |  ProcLoop.Time_In_Station............... 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  StartMemAccessStation:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  StartMemAccessStation.Number_In_Station 62          1799.000000 1860.000000 1829.500000 320.250000  17.895530   0.009782    4.454560    0.950000    
+|  |  |  |  StartMemAccessStation.Time_In_Station.. 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Station_3:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Station_3.Number_In_Station............ 62          1799.000000 1860.000000 1829.500000 320.250000  17.895530   0.009782    4.454560    0.950000    
+|  |  |  |  Station_3.Time_In_Station.............. 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Station_4:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Station_4.Number_In_Station............ 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Station_4.Time_In_Station.............. 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Station_5:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Station_5.Number_In_Station............ 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Station_5.Time_In_Station.............. 0           0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  End of Report for replication 30 of 30
+|  ------------------------------
+|  
+|  Begin of Report for Simulation (based on 30 replications)
+|  |  Statistis for Create:
+|  |  |  Create_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 30          126.000000  126.000000  126.000000  0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Dispose:
+|  |  |  Dispose_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_1.Count_number_out............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for EntityType:
+|  |  |  Init:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Delay_1.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_2.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_3.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_4.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Init.Total_Time........................ 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_5.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_6.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_7.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Transfer Time.......................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Time in Stations....................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Memory Access:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Delay_1.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_2.Waiting_Time................... 30          0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  Delay_3.Waiting_Time................... 30          0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  Delay_4.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Memory Access.Total_Time............... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_5.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_6.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_7.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Transfer Time.......................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Time in Stations....................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Process:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Delay_1.Waiting_Time................... 30          0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  Delay_2.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_3.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_4.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Process.Total_Time..................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_5.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_6.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_7.Waiting_Time................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Transfer Time.......................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Time in Stations....................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Queue:
+|  |  |  HoldProcessMMUQueue:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  HoldProcessMMUQueue.Number_In_Queue.... 30          31.500000   31.500000   31.500000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  HoldProcessMMUQueue.Time_In_Queue...... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  HoldSuspendedQueue:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  HoldSuspendedQueue.Number_In_Queue..... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  HoldSuspendedQueue.Time_In_Queue....... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  SeizeMMUQueue:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  SeizeMMUQueue.Number_In_Queue.......... 30          10.921053   10.921053   10.921053   -0.000000   -nan        -nan        -nan        0.950000    
+|  |  |  |  SeizeMMUQueue.Time_In_Queue............ 30          0.000000    0.000000    0.000000    -0.000000   -nan        -nan        -nan        0.950000    
+|  |  Statistis for Resource:
+|  |  |  MMU:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  MMU.Time_Seized........................ 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  MMU.Seizes............................. 30          62.000000   62.000000   62.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  MMU.Releases........................... 30          62.000000   62.000000   62.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Station:
+|  |  |  ProcLoop:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  ProcLoop.Number_In_Station............. 30          63.500000   3717.500000 1890.500000 1189377.00001090.585622 0.576877    390.261053  0.950000    
+|  |  |  |  ProcLoop.Time_In_Station............... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  StartMemAccessStation:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  StartMemAccessStation.Number_In_Station 30          31.500000   1829.500000 930.500000  287979.66666536.637370  0.576719    192.033217  0.950000    
+|  |  |  |  StartMemAccessStation.Time_In_Station.. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Station_3:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Station_3.Number_In_Station............ 30          31.500000   1829.500000 930.500000  287979.66666536.637370  0.576719    192.033217  0.950000    
+|  |  |  |  Station_3.Time_In_Station.............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Station_4:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Station_4.Number_In_Station............ 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Station_4.Time_In_Station.............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Station_5:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Station_5.Number_In_Station............ 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Station_5.Time_In_Station.............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  End of Report for Simulation
+Simulation of model "Model 1" has finished.

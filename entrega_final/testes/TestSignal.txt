@@ -1,0 +1,27 @@
+|  Begin of Report for Simulation (based on 30 replications)
+|  |  Statistis for Create:
+|  |  |  Create_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 30          400.000000  400.000000  400.000000  0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Create_2:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Count number in........................ 30          101.000000  101.000000  101.000000  0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Dispose:
+|  |  |  Dispose_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_1.Count_number_out............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  Dispose_2:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Dispose_2.Count_number_out............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for EntityType:
+|  |  |  Entity:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Entity.Total_Time...................... 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_1.Waiting_Time................... 30          0.166667    0.166667    0.166667    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  Statistis for Queue:
+|  |  |  Queue_HOLD_1:
+|  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
+|  |  |  |  Queue_HOLD_1.Number_In_Queue........... 30          200.500000  200.500000  200.500000  0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Queue_HOLD_1.Time_In_Queue............. 30          0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  End of Report for Simulation
+Simulation of model "Model 1" has finished.

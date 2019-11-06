@@ -1,0 +1,210 @@
+# Genesys simulation model 
+# Last saved on Wed Nov  6 02:46:38 2019
+# simulator infos
+name=ReGenESyS - Reborn Generic and Expansible System Simulator; typename=SimulatorInfo; version=190909; 
+
+# model infos
+analystName=; description=; name=Model 1; numberOfReplications=30; projectTitle=; replicationLength=5.000000; replicationLengthTimeUnit=5; terminatingCondition=; typename=ModelInfo; version=1.0; warmUpTime=0.000000; warmUpTimeTimeUnit=5; 
+
+# model elements
+attributeName=; id=10; name=HoldSuspendedQueue; orderRule=1; typename=Queue; 
+
+attributeName=; id=13; name=HoldProcessMMUQueue; orderRule=1; typename=Queue; 
+
+attributeName=; id=7; name=SeizeMMUQueue; orderRule=1; typename=Queue; 
+
+capacity=1; costBusyHour=1.000000; costIdleHour=1.000000; costPerUse=1.000000; id=16; name=MMU; typename=Resource; 
+
+id=137; name=Entity.ArrivalTime; typename=Attribute; 
+
+id=138; name=Entity.TransferTime; typename=Attribute; 
+
+id=139; name=Entity.Station; typename=Attribute; 
+
+id=143; name=Entity.WaitTime; typename=Attribute; 
+
+id=144; name=Entity.ArrivalAtProcLoop; typename=Attribute; 
+
+id=148; name=Entity.ArrivalAtStartMemAccessStation; typename=Attribute; 
+
+id=149; name=Entity.ArrivalAtStation_3; typename=Attribute; 
+
+id=150; name=Entity.ArrivalAtStation_4; typename=Attribute; 
+
+id=151; name=Entity.ArrivalAtStation_5; typename=Attribute; 
+
+id=1; initialNVACost=0.000000; initialOtherCost=0.000000; initialPicture=report; initialVACost=0.000000; initialWaitingCost=0.000000; name=Process; typename=EntityType; 
+
+id=20; name=MemorySize; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=21; name=PageSize; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=22; name=ProcessCount; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=23; name=ProcessMaxCount; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=24; name=TLB; numCols=2; numRows=6; numValues=0; typename=Variable; 
+
+id=25; name=DiskTransferRate; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=26; name=TLBi; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=27; name=TLBmin; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=28; name=PageTables; numCols=2; numRows=128; numValues=0; typename=Variable; 
+
+id=29; name=MainMemory; numCols=2; numRows=64; numValues=0; typename=Variable; 
+
+id=2; initialNVACost=0.000000; initialOtherCost=0.000000; initialPicture=report; initialVACost=0.000000; initialWaitingCost=0.000000; name=Init; typename=EntityType; 
+
+id=30; name=MemToRemove; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=31; name=MEMi; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=32; name=MEMusage; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=33; name=BreakLoop; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=34; name=Suspend; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=35; name=TLBhits; numCols=1; numRows=1; numValues=0; typename=Variable; 
+
+id=39; name=ProcLoop; typename=Station; 
+
+id=3; initialNVACost=0.000000; initialOtherCost=0.000000; initialPicture=report; initialVACost=0.000000; initialWaitingCost=0.000000; name=Memory Access; typename=EntityType; 
+
+id=4; name=pid; typename=Attribute; 
+
+id=50; name=StartMemAccessStation; typename=Station; 
+
+id=5; name=PageNumber; typename=Attribute; 
+
+id=63; name=Station_3; typename=Station; 
+
+id=6; name=PhysAddr; typename=Attribute; 
+
+id=70; name=Station_4; typename=Station; 
+
+id=74; name=Station_5; typename=Station; 
+
+# model components
+allocationType=0; id=58; name=Seize_1; nextId0=59; nextSize=1; priority==2; quantity=1; queueId=7; queueName=SeizeMMUQueue; resourceId=16; resourceName=MMU; resourceType=2; rule=4; saveAttribute=; typename=Seize; 
+
+assignments=1; destination0=; destinationType0=2; expression0=; id=49; name=Assign_3; nextId0=54; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=MEMi; destinationType0=1; expression0=MEMi+1; id=100; name=Assign_14; nextId0=96; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=MEMusage; destinationType0=1; expression0=MEMusage+1; id=105; name=Assign_17; nextId0=109; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=MemToRemove; destinationType0=1; expression0=MEMi; id=99; name=Assign_13; nextId0=100; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=PageNumber; destinationType0=0; expression0=TRUNC(UNIF(1,ROUND(MemorySize/PageSize))); id=47; name=Assign_2; nextId0=46; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=PageTables; destinationType0=1; expression0=PageTables + 1; id=80; name=Assign_6; nextId0=81; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=PhysAddr; destinationType0=0; expression0=PageTables; id=68; name=Assign_5; nextId0=69; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=Suspend; destinationType0=1; expression0=0; id=56; name=Assign_4; nextId0=57; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=TLBi; destinationType0=1; expression0=TLBi+1; id=91; name=Assign_10; nextId0=86; nextSize=1; typename=Assign; 
+
+assignments=1; destination0=TLBi; destinationType0=1; expression0=TLBmin; id=90; name=Assign_9; nextId0=91; nextSize=1; typename=Assign; 
+
+assignments=2; destination0=BreakLoop; destinationType0=1; expression0=0; id=103; name=Assign_16; nextId0=104; nextSize=1; typename=Assign; 
+
+assignments=2; destination0=BreakLoop; destinationType0=1; expression0=0; id=92; name=Assign_11; nextId0=93; nextSize=1; typename=Assign; 
+
+assignments=2; destination0=BreakLoop; destinationType0=1; expression0=1; id=101; name=Assign_15; nextId0=96; nextSize=1; typename=Assign; 
+
+assignments=2; destination0=BreakLoop; destinationType0=1; expression0=1; id=88; name=Assign_8; nextId0=86; nextSize=1; typename=Assign; 
+
+assignments=2; destination0=PageTables; destinationType0=1; expression0=0; id=106; name=Assign_18; nextId0=107; nextSize=1; typename=Assign; 
+
+assignments=3; destination0=MemToRemove; destinationType0=1; expression0=1; id=95; name=Assign_12; nextId0=96; nextSize=1; typename=Assign; 
+
+assignments=3; destination0=TLBi; destinationType0=1; expression0=1; id=85; name=Assign_7; nextId0=86; nextSize=1; typename=Assign; 
+
+assignments=4; destination0=; destinationType0=2; expression0=; id=38; name=Assign_1; nextId0=43; nextSize=1; typename=Assign; 
+
+assignments=4; destination0=MainMemory; destinationType0=1; expression0=MemToRemove; id=109; name=Assign_19; nextId0=110; nextSize=1; typename=Assign; 
+
+condition0=MEMi <= ROUND(MemorySize/PageSize); conditions=1; id=96; name=Decide_7; nextId0=97; nextId1=102; nextSize=2; typename=Decide; 
+
+condition0=MEMi > 0; conditions=1; id=97; name=Decide_8; nextId0=98; nextId1=101; nextSize=2; typename=Decide; 
+
+condition0=MemToRemove == 0; conditions=1; id=104; name=Decide_10; nextId0=105; nextId1=106; nextSize=2; typename=Decide; 
+
+condition0=PhysAddr > 0; conditions=1; id=69; name=Decide_3; nextId0=78; nextId1=79; nextSize=2; typename=Decide; 
+
+condition0=Suspend==1; conditions=1; id=55; name=Decide_2; nextId0=42; nextId1=56; nextSize=2; typename=Decide; 
+
+condition0=TLBi < TLBmin; conditions=1; id=89; name=Decide_6; nextId0=90; nextId1=91; nextSize=2; typename=Decide; 
+
+condition0=TLBi <= ROUND(ROUND(MemorySize/PageSize) * 0.1) and BreakLoop==0; conditions=1; id=86; name=Decide_4; nextId0=87; nextId1=92; nextSize=2; typename=Decide; 
+
+condition0=UNIF(0,1) <= 0.1; conditions=1; id=107; name=Decide_11; nextId0=108; nextId1=109; nextSize=2; typename=Decide; 
+
+condition0=UNIF(0,1) >= 0.98; conditions=1; id=45; name=Decide_1; nextId0=46; nextId1=47; nextSize=2; typename=Decide; 
+
+condition0=pid < 1; conditions=1; id=98; name=Decide_9; nextId0=99; nextId1=100; nextSize=2; typename=Decide; 
+
+condition0=pid > 0; conditions=1; id=87; name=Decide_5; nextId0=89; nextId1=88; nextSize=2; typename=Decide; 
+
+delayExpression=(PageSize / 1024) * DiskTransferRate * 1; delayExpressionTimeUnit=5; id=108; name=Delay_6; nextId0=109; nextSize=1; typename=Delay; 
+
+delayExpression=(PageSize / 1024) * DiskTransferRate * 1; delayExpressionTimeUnit=5; id=110; name=Delay_7; nextId0=111; nextSize=1; typename=Delay; 
+
+delayExpression=0.000000001; delayExpressionTimeUnit=5; id=59; name=Delay_2; nextId0=60; nextSize=1; typename=Delay; 
+
+delayExpression=0.000000011; delayExpressionTimeUnit=5; id=93; name=Delay_5; nextId0=94; nextSize=1; typename=Delay; 
+
+delayExpression=0.00000001; delayExpressionTimeUnit=5; id=61; name=Delay_3; nextId0=67; nextSize=1; typename=Delay; 
+
+delayExpression=0.00000001; delayExpressionTimeUnit=5; id=62; name=Delay_4; nextId0=68; nextSize=1; typename=Delay; 
+
+delayExpression=TRIA(3,8.96,12) * 0.000000001; delayExpressionTimeUnit=5; id=44; name=Delay_1; nextId0=45; nextSize=1; typename=Delay; 
+
+entitiesPerCreation=2; entityTypename=Init; firstCreation=0.000000; id=36; maxCreations=4294967295; name=Create_1; nextId0=38; nextSize=1; timeBetweenCreations=1; timeBetweenCreationsTimeUnit=5; typename=Create; 
+
+id=102; name=Signal_2; nextId0=103; nextSize=1; typename=Signal; 
+
+id=111; name=Signal_3; nextId0=112; nextSize=1; typename=Signal; 
+
+id=112; name=Route_7; nextSize=0; routeDestinationType=0; routeTimeExpression=0; routeTimeTimeUnit=7; stationId=70; stationName=Station_4; typename=Route; 
+
+id=42; name=Enter_1; nextId0=44; nextSize=1; stationName=ProcLoop; typename=Enter; 
+
+id=43; name=Route_1; nextSize=0; routeDestinationType=0; routeTimeExpression=0; routeTimeTimeUnit=7; stationId=39; stationName=ProcLoop; typename=Route; 
+
+id=46; name=Separate_1; nextId0=48; nextId1=49; nextSize=2; typename=Separate; 
+
+id=48; name=Hold_1; nextId0=55; nextSize=1; queueName=HoldProcessMMUQueue; typename=Hold; waitForValue=pid; 
+
+id=53; name=Enter_2; nextId0=58; nextSize=1; stationName=StartMemAccessStation; typename=Enter; 
+
+id=54; name=Route_2; nextSize=0; routeDestinationType=0; routeTimeExpression=0; routeTimeTimeUnit=7; stationId=50; stationName=StartMemAccessStation; typename=Route; 
+
+id=57; name=Hold_2; nextId0=48; nextSize=1; queueName=HoldSuspendedQueue; typename=Hold; waitForValue=pid; 
+
+id=60; name=Search_1; nextId0=61; nextId1=62; nextSize=2; typename=Search; 
+
+id=66; name=Enter_3; nextId0=80; nextSize=1; stationName=Station_3; typename=Enter; 
+
+id=67; name=Route_3; nextSize=0; routeDestinationType=0; routeTimeExpression=0; routeTimeTimeUnit=7; stationId=63; stationName=Station_3; typename=Route; 
+
+id=73; name=Enter_4; nextId0=85; nextSize=1; stationName=Station_4; typename=Enter; 
+
+id=77; name=Enter_5; nextId0=95; nextSize=1; stationName=Station_5; typename=Enter; 
+
+id=78; name=Route_4; nextSize=0; routeDestinationType=0; routeTimeExpression=0; routeTimeTimeUnit=7; stationId=70; stationName=Station_4; typename=Route; 
+
+id=79; name=Route_5; nextSize=0; routeDestinationType=0; routeTimeExpression=0; routeTimeTimeUnit=7; stationId=74; stationName=Station_5; typename=Route; 
+
+id=81; name=Release_1; nextId0=82; nextSize=1; priority=0; quantity=1; resourceId=16; resourceName=MMU; resourceType=2; rule=4; saveAttribute=; typename=Release; 
+
+id=82; name=Signal_1; nextId0=83; nextSize=1; typename=Signal; 
+
+id=83; name=Dispose_1; nextSize=0; typename=Dispose; 
+
+id=94; name=Route_6; nextSize=0; routeDestinationType=0; routeTimeExpression=0; routeTimeTimeUnit=7; stationId=63; stationName=Station_3; typename=Route; 
+
