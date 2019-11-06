@@ -1,7 +1,0 @@
-version
-modelload=models/genesysmodel.txt
-modelcheck
-start
-shorreport
-quit
-
