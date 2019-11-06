@@ -1,10 +1,10 @@
 # Genesys simulation model 
-# Last saved on Wed Nov  6 02:51:59 2019
+# Last saved on Wed Nov  6 03:51:25 2019
 # simulator infos
 name=ReGenESyS - Reborn Generic and Expansible System Simulator; typename=SimulatorInfo; version=190909; 
 
 # model infos
-analystName=; description=; name=Model 1; numberOfReplications=30; projectTitle=; replicationLength=20.000000; replicationLengthTimeUnit=7; terminatingCondition=; typename=ModelInfo; version=1.0; warmUpTime=0.000000; warmUpTimeTimeUnit=5; 
+analystName=; description=; name=Model 1; numberOfReplications=3; projectTitle=; replicationLength=20.000000; replicationLengthTimeUnit=7; terminatingCondition=; typename=ModelInfo; version=1.0; warmUpTime=0.000000; warmUpTimeTimeUnit=5; 
 
 # model elements
 attributeName=; id=10; name=Queue_HOLD_1; orderRule=1; typename=Queue; 

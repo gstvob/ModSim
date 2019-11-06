@@ -1,16 +1,16 @@
-|  Begin of Report for Simulation (based on 15 replications)
+|  Begin of Report for Simulation (based on 3 replications)
 |  |  Statistis for Create:
 |  |  |  Create_1:
 |  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
-|  |  |  |  Count number in........................ 15          25.000000   25.000000   25.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Count number in........................ 3           25.000000   25.000000   25.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
 |  |  Statistis for Dispose:
 |  |  |  Dispose_1:
 |  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
-|  |  |  |  Dispose_1.Count_number_out............. 15          24.000000   24.000000   24.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Dispose_1.Count_number_out............. 3           24.000000   24.000000   24.000000   0.000000    0.000000    0.000000    0.000000    0.950000    
 |  |  Statistis for EntityType:
 |  |  |  Entity:
 |  |  |  |  name                                    elems       min         max         average     variance    stddev      varCoef     confInterv  confLevel   
-|  |  |  |  Delay_1.Waiting_Time................... 15          0.010417    0.010417    0.010417    0.000000    0.000000    0.000000    0.000000    0.950000    
-|  |  |  |  Entity.Total_Time...................... 15          0.114583    0.114583    0.114583    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Delay_1.Waiting_Time................... 3           0.010417    0.010417    0.010417    0.000000    0.000000    0.000000    0.000000    0.950000    
+|  |  |  |  Entity.Total_Time...................... 3           0.114583    0.114583    0.114583    0.000000    0.000000    0.000000    0.000000    0.950000    
 |  End of Report for Simulation
 Simulation of model "Model 1" has finished.

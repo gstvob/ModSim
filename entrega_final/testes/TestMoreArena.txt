@@ -1,0 +1,16 @@
+                             Resumo de resultados para 3 Replicações
+
+Projeto: Unnamed Project                                             Data da execução :11/ 3/2019
+Analista: gustavo.borgesfr@gmail.com                                  Data de revisão do modelo:11/ 3/2019
+
+
+                                             RESULTADOS
+
+Identificador                                 Média    Meia-largura Mínima    Maximo # de Replicações
+___________________________________________________________________________________________________
+
+Entity 1.NumberIn                           201.00     .00000     201.00     201.00     3
+Entity 1.NumberOut                          121.00     .00000     121.00     121.00     3
+recurso_de_teste.NumberSeized               41.000     .00000     41.000     41.000     3
+recurso_de_teste.ScheduledUtilization       1.0000     .00000     1.0000     1.0000     3
+System.NumberOut                            121.00     .00000     121.00     121.00     3

@@ -1,0 +1,8 @@
+                                           RESULTADOS
+
+Identificador                                 Média    Meia-largura Mínima    Maximo # de Replicações
+___________________________________________________________________________________________________
+
+Entity 1.NumberIn                           61.000     .00000     61.000     61.000     3
+Entity 1.NumberOut                          60.000     .00000     60.000     60.000     3
+System.NumberOut                            60.000     .00000     60.000     60.000     3

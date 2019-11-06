@@ -56,7 +56,7 @@ int TestMore::main(int argc, char** argv) {
     ModelInfo* infos = model->getInfos();
     infos->setReplicationLength(20);
     infos->setReplicationLengthTimeUnit(Util::TimeUnit::hour);
-    infos->setNumberOfReplications(30);
+    infos->setNumberOfReplications(3);
     //
     EntityType* entity = new EntityType(elements, "Entity");
     elements->insert(Util::TypeOf<EntityType>(), entity);
